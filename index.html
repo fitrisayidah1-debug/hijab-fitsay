@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 
-// Hijab Fitsay - Single-file React component using Tailwind CSS
-// Default export a React component. Tailwind must be set up in the project.
-
 export default function HijabFitsayPage() {
   const [cart, setCart] = useState([]);
   const [selected, setSelected] = useState(null);
@@ -10,27 +7,27 @@ export default function HijabFitsayPage() {
   const products = [
     {
       id: 1,
-      name: "Hijab Satin Premium",
+      name: "Hijab Pashmina Premium",
       price: 129000,
-      img: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=1000&q=60",
-      color: "Soft Mauve",
-      desc: "Lembut, jatuh, dan nyaman untuk sehari-hari atau acara spesial.",
+      img: "https://images.unsplash.com/photo-1606820406111-21b0fca42f86?auto=format&fit=crop&w=1000&q=60",
+      color: "Rose Dust",
+      desc: "Hijab pashmina dengan bahan satin lembut, tampilan elegan dan berkelas untuk acara spesial.",
     },
     {
       id: 2,
-      name: "Hijab Voal Light",
-      price: 89000,
-      img: "https://images.unsplash.com/photo-1520975917341-1c2f8d1a9f2d?auto=format&fit=crop&w=1000&q=60",
-      color: "Dusty Pink",
-      desc: "Ringan, adem, mudah dibentuk, cocok untuk gaya casual.",
+      name: "Hijab Voal Breeze",
+      price: 99000,
+      img: "https://images.unsplash.com/photo-1636041281462-8f24b35c3bbf?auto=format&fit=crop&w=1000&q=60",
+      color: "Soft Olive",
+      desc: "Bahan voal ringan, adem, dan mudah dibentuk, cocok untuk tampilan santai maupun formal.",
     },
     {
       id: 3,
-      name: "Hijab Jersey Sport",
-      price: 99000,
-      img: "https://images.unsplash.com/photo-1600180758890-2a7b1f9d7c6e?auto=format&fit=crop&w=1000&q=60",
-      color: "Olive",
-      desc: "Stretchy dan breathable untuk aktivitas aktif.",
+      name: "Hijab Instan Syar'i",
+      price: 109000,
+      img: "https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=1000&q=60",
+      color: "Nude Brown",
+      desc: "Hijab instan praktis dengan desain modern dan cutting rapi yang menawan.",
     },
   ];
 
@@ -43,230 +40,132 @@ export default function HijabFitsayPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-slate-100 text-slate-900">
-      <header className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
+    <div className="min-h-screen bg-gradient-to-b from-rose-50 via-white to-amber-50 text-slate-800 font-sans">
+      <header className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between border-b border-rose-100">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-rose-400 to-pink-500 flex items-center justify-center text-white font-bold">F</div>
+          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-rose-400 to-amber-300 flex items-center justify-center text-white font-bold shadow-md">F</div>
           <div>
-            <h1 className="text-lg font-semibold">Hijab <span className="text-pink-500">Fitsay</span></h1>
-            <p className="text-xs text-slate-500 -mt-0.5">Elegan • Estetik • Nyaman</p>
+            <h1 className="text-lg font-semibold tracking-wide">Hijab <span className="text-rose-500">Fitsay</span></h1>
+            <p className="text-xs text-slate-500 -mt-0.5">Elegan | Estetik | Nyaman</p>
           </div>
         </div>
 
-        <nav className="hidden md:flex gap-6 items-center text-sm">
-          <a className="hover:text-pink-500" href="#collections">Collections</a>
-          <a className="hover:text-pink-500" href="#about">About</a>
-          <a className="hover:text-pink-500" href="#testimonials">Testimonials</a>
-          <a className="hover:text-pink-500" href="#contact">Contact</a>
+        <nav className="hidden md:flex gap-8 text-sm font-medium">
+          <a className="hover:text-rose-500 transition" href="#collections">Koleksi</a>
+          <a className="hover:text-rose-500 transition" href="#about">Tentang</a>
+          <a className="hover:text-rose-500 transition" href="#testimonials">Ulasan</a>
+          <a className="hover:text-rose-500 transition" href="#contact">Kontak</a>
         </nav>
 
-        <div className="flex items-center gap-4">
-          <button className="hidden md:inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200 text-sm">Login</button>
-          <button className="relative group" aria-label="cart">
-            <svg className="w-6 h-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="relative">
+          <button className="relative">
+            <svg className="w-6 h-6 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4" />
             </svg>
-            <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">{cart.length}</span>
+            {cart.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-rose-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center shadow">{cart.length}</span>
+            )}
           </button>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-6">
-        {/* HERO */}
-        <section className="grid md:grid-cols-2 gap-8 items-center py-12">
-          <div className="space-y-6">
-            <p className="text-sm uppercase tracking-wide text-pink-500">New Collection 2025</p>
-            <h2 className="text-4xl font-extrabold leading-tight">Hijab elegan untuk setiap momen — <span className="text-pink-500">Fitsay</span></h2>
-            <p className="text-slate-600">Koleksi hijab premium dengan bahan berkualitas, nyaman dipakai sepanjang hari, dan tampil estetik untuk gaya kasual maupun formal.</p>
-            <div className="flex items-center gap-4">
-              <a href="#collections" className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-pink-500 text-white font-medium shadow-lg hover:opacity-95">Shop Collections</a>
-              <a href="#about" className="inline-flex items-center gap-2 px-4 py-3 rounded-xl border border-slate-200 text-sm">Learn More</a>
-            </div>
-
-            <div className="grid grid-cols-3 gap-3 mt-6">
-              <div className="p-4 bg-white rounded-xl shadow flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-pink-50 flex items-center justify-center">🪡</div>
-                <div>
-                  <div className="text-sm font-semibold">Material Premium</div>
-                  <div className="text-xs text-slate-500">Sentuhan mewah dan nyaman</div>
-                </div>
-              </div>
-              <div className="p-4 bg-white rounded-xl shadow flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-pink-50 flex items-center justify-center">🚚</div>
-                <div>
-                  <div className="text-sm font-semibold">Pengiriman Cepat</div>
-                  <div className="text-xs text-slate-500">Packing rapi & aman</div>
-                </div>
-              </div>
-              <div className="p-4 bg-white rounded-xl shadow flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-pink-50 flex items-center justify-center">🔁</div>
-                <div>
-                  <div className="text-sm font-semibold">Mudah Return</div>
-                  <div className="text-xs text-slate-500">Garansi kepuasan</div>
-                </div>
-              </div>
-            </div>
+      {/* HERO SECTION */}
+      <section className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-center px-6 py-16">
+        <div className="space-y-6">
+          <h2 className="text-4xl md:text-5xl font-extrabold leading-tight text-rose-600">Tampil Anggun dengan Hijab Premium</h2>
+          <p className="text-slate-600 text-base md:text-lg">Koleksi hijab berkualitas tinggi dari <span className="font-semibold text-rose-500">Fitsay</span> hadir untuk mempercantik setiap langkahmu. Lembut, ringan, dan elegan dalam setiap tampilan.</p>
+          <a href="#collections" className="inline-block bg-rose-500 hover:bg-rose-600 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition">Lihat Koleksi</a>
+        </div>
+        <div className="relative">
+          <img src="https://images.unsplash.com/photo-1606820406111-21b0fca42f86?auto=format&fit=crop&w=1200&q=60" alt="Hijab Hero" className="rounded-3xl shadow-2xl object-cover w-full h-[500px]" />
+          <div className="absolute -bottom-6 left-6 bg-white rounded-2xl p-4 shadow-lg">
+            <p className="text-sm font-medium text-rose-600">✨ Koleksi Terbaru</p>
+            <p className="text-slate-600 text-xs">Hijab Pashmina Premium - {formatRupiah(129000)}</p>
           </div>
+        </div>
+      </section>
 
-          <div className="relative">
-            <div className="aspect-[4/5] w-full rounded-2xl overflow-hidden shadow-xl">
-              <img src="https://images.unsplash.com/photo-1520975917341-1c2f8d1a9f2d?auto=format&fit=crop&w=1400&q=60" alt="hero" className="object-cover w-full h-full" />
-            </div>
-            <div className="absolute -bottom-6 left-6 bg-white rounded-xl p-4 shadow-md w-64">
-              <div className="flex items-center gap-3">
-                <img src="https://images.unsplash.com/photo-1600180758890-2a7b1f9d7c6e?auto=format&fit=crop&w=200&q=60" className="w-12 h-12 rounded-lg object-cover" />
-                <div>
-                  <div className="text-sm font-semibold">Best Seller</div>
-                  <div className="text-xs text-slate-500">Hijab Satin Premium</div>
+      {/* COLLECTION SECTION */}
+      <section id="collections" className="max-w-7xl mx-auto px-6 py-16">
+        <h3 className="text-3xl font-bold text-center mb-10 text-rose-600">Koleksi Pilihan</h3>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products.map((p) => (
+            <div key={p.id} className="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition overflow-hidden border border-rose-50">
+              <img src={p.img} alt={p.name} className="w-full h-64 object-cover" />
+              <div className="p-6">
+                <h4 className="text-lg font-semibold text-rose-700">{p.name}</h4>
+                <p className="text-xs text-rose-400 mt-1">{p.color}</p>
+                <p className="text-sm text-slate-600 mt-3">{p.desc}</p>
+                <div className="mt-5 flex justify-between items-center">
+                  <span className="text-lg font-bold text-rose-600">{formatRupiah(p.price)}</span>
+                  <button onClick={() => addToCart(p)} className="bg-rose-500 text-white px-4 py-2 rounded-xl text-sm shadow hover:bg-rose-600 transition">Tambah</button>
                 </div>
-                <div className="ml-auto text-pink-500 font-semibold">{formatRupiah(129000)}</div>
               </div>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ABOUT SECTION */}
+      <section id="about" className="bg-gradient-to-r from-rose-100 via-amber-50 to-white py-20">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+          <img src="https://images.unsplash.com/photo-1636041281462-8f24b35c3bbf?auto=format&fit=crop&w=1000&q=60" alt="Tentang Hijab Fitsay" className="rounded-3xl shadow-xl" />
+          <div>
+            <h3 className="text-3xl font-bold text-rose-600 mb-4">Tentang Kami</h3>
+            <p className="text-slate-700 leading-relaxed">Hijab Fitsay adalah brand hijab yang menghadirkan keanggunan, kenyamanan, dan keindahan dalam setiap detail. Kami percaya bahwa setiap hijab adalah simbol dari kepercayaan diri dan keindahan hati seorang wanita.</p>
+            <ul className="mt-6 space-y-2 text-slate-600">
+              <li>🌸 Bahan lembut dan adem</li>
+              <li>🧵 Jahitan presisi dan awet</li>
+              <li>🎨 Warna pastel yang elegan</li>
+              <li>🌿 Ramah lingkungan</li>
+            </ul>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* COLLECTIONS */}
-        <section id="collections" className="py-12">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-2xl font-bold">Collections</h3>
-            <a href="#collections" className="text-sm text-pink-500">Lihat semua</a>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map((p) => (
-              <article key={p.id} className="bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition-shadow">
-                <img src={p.img} alt={p.name} className="w-full h-56 object-cover" />
-                <div className="p-4">
-                  <h4 className="font-semibold">{p.name}</h4>
-                  <p className="text-xs text-slate-500 mt-1">{p.color}</p>
-                  <p className="text-sm text-slate-600 mt-2">{p.desc}</p>
-                  <div className="mt-4 flex items-center justify-between">
-                    <div className="text-lg font-bold">{formatRupiah(p.price)}</div>
-                    <div className="flex items-center gap-2">
-                      <button onClick={() => { setSelected(p); }} className="text-sm px-3 py-2 rounded-lg border border-slate-200">Detail</button>
-                      <button onClick={() => addToCart(p)} className="text-sm px-3 py-2 rounded-lg bg-pink-500 text-white">Add</button>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* ABOUT */}
-        <section id="about" className="py-12">
-          <div className="bg-gradient-to-r from-white to-rose-50 rounded-2xl p-8 shadow">
-            <div className="grid md:grid-cols-2 gap-6 items-center">
-              <div>
-                <h3 className="text-2xl font-bold">Tentang Hijab Fitsay</h3>
-                <p className="text-slate-600 mt-3">Hijab Fitsay hadir untuk perempuan yang ingin tampil elegan tanpa mengorbankan kenyamanan. Kami memilih bahan premium, proses jahit rapi, dan desain yang mengikuti tren namun tetap timeless.</p>
-                <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <li className="text-sm">✅ Bahan anti luntur</li>
-                  <li className="text-sm">✅ Jahitan presisi</li>
-                  <li className="text-sm">✅ Warna tahan lama</li>
-                  <li className="text-sm">✅ Packing ramah lingkungan</li>
-                </ul>
-              </div>
-              <div className="flex justify-center">
-                <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=60" className="w-72 h-72 rounded-2xl object-cover shadow-lg" alt="about" />
-              </div>
+      {/* TESTIMONIALS */}
+      <section id="testimonials" className="max-w-7xl mx-auto px-6 py-16">
+        <h3 className="text-3xl font-bold text-center mb-10 text-rose-600">Apa Kata Mereka</h3>
+        <div className="grid md:grid-cols-3 gap-6">
+          {[
+            { name: "Aisha", city: "Jakarta", text: "Bahan super lembut dan adem, cocok banget untuk kerja dan acara." },
+            { name: "Rina", city: "Surabaya", text: "Hijabnya cantik banget, warna pastel-nya bikin wajah cerah!" },
+            { name: "Siti", city: "Bandung", text: "Produk Fitsay selalu premium. Pengiriman cepat dan packing rapi!" },
+          ].map((t, i) => (
+            <div key={i} className="bg-white p-8 rounded-3xl shadow-lg text-center border border-rose-50 hover:shadow-2xl transition">
+              <p className="text-slate-600 italic mb-4">“{t.text}”</p>
+              <h5 className="font-semibold text-rose-600">{t.name}</h5>
+              <span className="text-xs text-slate-400">{t.city}</span>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer id="contact" className="bg-white py-10 border-t border-rose-100">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+          <div>
+            <h4 className="text-lg font-bold text-rose-600 mb-2">Hijab Fitsay</h4>
+            <p className="text-slate-600 text-sm">Tampil elegan dengan hijab berkelas dan nyaman setiap hari.</p>
           </div>
-        </section>
-
-        {/* TESTIMONIALS */}
-        <section id="testimonials" className="py-12">
-          <h3 className="text-2xl font-bold mb-6">What customers say</h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-2xl shadow">
-              <p className="text-slate-600">"Bahan nyaman, jatuhnya bagus. Saya pakai sepanjang hari dan tetap rapi."</p>
-              <div className="mt-4 flex items-center gap-3">
-                <div className="w-10 h-10 bg-pink-50 rounded-full flex items-center justify-center">A</div>
-                <div>
-                  <div className="text-sm font-semibold">Aisha</div>
-                  <div className="text-xs text-slate-500">Jakarta</div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white p-6 rounded-2xl shadow">
-              <p className="text-slate-600">"Warna sesuai, packing rapi, pengiriman cepat. Recommended!"</p>
-              <div className="mt-4 flex items-center gap-3">
-                <div className="w-10 h-10 bg-pink-50 rounded-full flex items-center justify-center">R</div>
-                <div>
-                  <div className="text-sm font-semibold">Rina</div>
-                  <div className="text-xs text-slate-500">Surabaya</div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white p-6 rounded-2xl shadow">
-              <p className="text-slate-600">"Modelnya simpel tapi elegan, cocok untuk kerja maupun acara."</p>
-              <div className="mt-4 flex items-center gap-3">
-                <div className="w-10 h-10 bg-pink-50 rounded-full flex items-center justify-center">S</div>
-                <div>
-                  <div className="text-sm font-semibold">Siti</div>
-                  <div className="text-xs text-slate-500">Bandung</div>
-                </div>
-              </div>
-            </div>
+          <div>
+            <h5 className="font-semibold text-rose-500 mb-2">Kontak Kami</h5>
+            <ul className="text-slate-600 text-sm space-y-1">
+              <li>Email: support@fitsay.id</li>
+              <li>WhatsApp: 0812-3456-7890</li>
+              <li>Instagram: @hijabfitsay</li>
+            </ul>
           </div>
-        </section>
-
-        {/* FOOTER & CONTACT */}
-        <footer id="contact" className="py-12">
-          <div className="bg-white p-8 rounded-2xl shadow">
-            <div className="grid md:grid-cols-3 gap-6">
-              <div>
-                <h4 className="font-bold text-lg">Hijab <span className="text-pink-500">Fitsay</span></h4>
-                <p className="text-sm text-slate-600 mt-2">Follow kami di Instagram untuk update koleksi dan promo.</p>
-                <div className="mt-4 flex gap-3">
-                  <a className="text-sm px-3 py-2 rounded-lg border">@hijabfitsay</a>
-                  <a className="text-sm px-3 py-2 rounded-lg border">@fitsay.store</a>
-                </div>
-              </div>
-
-              <div>
-                <h5 className="font-semibold">Customer Care</h5>
-                <ul className="mt-3 text-sm text-slate-600 space-y-2">
-                  <li>support@fitsay.id</li>
-                  <li>Phone: 0812-3456-7890</li>
-                  <li>Senin - Jumat, 09:00 - 17:00</li>
-                </ul>
-              </div>
-
-              <div>
-                <h5 className="font-semibold">Subscribe</h5>
-                <p className="text-sm text-slate-600 mt-3">Dapatkan diskon 10% untuk pembelian pertama.</p>
-                <div className="mt-3 flex gap-2">
-                  <input className="flex-1 rounded-lg border border-slate-200 px-3 py-2" placeholder="email@domain.com" />
-                  <button className="rounded-lg px-4 py-2 bg-pink-500 text-white">Subscribe</button>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-6 text-center text-xs text-slate-400">© {new Date().getFullYear()} Hijab Fitsay. All rights reserved.</div>
-          </div>
-        </footer>
-      </main>
-
-      {/* PRODUCT DETAIL SIDEPANEL */}
-      {selected && (
-        <div className="fixed inset-0 bg-black/40 flex items-end md:items-center justify-center p-4">
-          <div className="bg-white rounded-2xl w-full md:w-3/5 p-6 shadow-lg">
-            <div className="flex gap-6">
-              <img src={selected.img} alt={selected.name} className="w-40 h-40 object-cover rounded-lg" />
-              <div>
-                <h4 className="text-xl font-bold">{selected.name}</h4>
-                <p className="text-sm text-slate-600 mt-2">{selected.desc}</p>
-                <div className="mt-4 text-lg font-semibold">{formatRupiah(selected.price)}</div>
-                <div className="mt-6 flex gap-3">
-                  <button onClick={() => { addToCart(selected); setSelected(null); }} className="px-4 py-2 rounded-lg bg-pink-500 text-white">Add to cart</button>
-                  <button onClick={() => setSelected(null)} className="px-4 py-2 rounded-lg border">Close</button>
-                </div>
-              </div>
+          <div>
+            <h5 className="font-semibold text-rose-500 mb-2">Berlangganan</h5>
+            <div className="flex gap-2">
+              <input type="text" placeholder="Email kamu..." className="flex-1 border border-rose-100 rounded-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-rose-400" />
+              <button className="bg-rose-500 text-white px-4 py-2 rounded-lg shadow hover:bg-rose-600">Kirim</button>
             </div>
           </div>
         </div>
-      )}
+        <div className="text-center text-xs text-slate-400 mt-6">© {new Date().getFullYear()} Hijab Fitsay. All rights reserved.</div>
+      </footer>
     </div>
   );
 }
