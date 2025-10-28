@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -16,13 +16,8 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       position: sticky; top: 0; z-index: 10;
     }
-    header h1 {
-      font-weight: 600; color: #6d1b3b; display: flex; align-items: center; gap: 10px;
-    }
-    header img {
-      width: 40px; height: 40px; border-radius: 50%;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
+    header h1 { font-weight: 600; color: #6d1b3b; display: flex; align-items: center; gap: 10px; }
+    header img { width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
     nav { display: flex; align-items: center; gap: 20px; }
     nav a { text-decoration: none; color: #6d1b3b; font-weight: 500; transition: 0.3s; }
     nav a:hover { color: #b63b6f; }
@@ -51,6 +46,31 @@
     }
     .hero button:hover { background-color: #6d1b3b; }
 
+    /* --- VIDEO SECTION --- */
+    .video-section {
+      text-align: center;
+      background-color: #fff0f6;
+      padding: 50px 20px;
+    }
+    .video-section h2 {
+      color: #b63b6f;
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+    .video-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    video {
+      width: 100%;
+      height: auto;
+      border: none;
+      outline: none;
+    }
+
     .section-title { text-align: center; margin-top: 60px; font-size: 2rem; color: #b63b6f; }
 
     /* Tentang Section */
@@ -64,28 +84,11 @@
       gap: 40px;
       text-align: left;
     }
-    .tentang img {
-      width: 320px; border-radius: 20px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-    }
-    .tentang-text {
-      max-width: 550px;
-    }
-    .tentang-text h2 {
-      color: #b63b6f;
-      margin-bottom: 15px;
-      font-size: 2rem;
-    }
-    .tentang-text p {
-      color: #555;
-      line-height: 1.7;
-      font-size: 1rem;
-      margin-bottom: 15px;
-    }
-    .tentang-text .highlight {
-      color: #6d1b3b;
-      font-weight: 600;
-    }
+    .tentang img { width: 320px; border-radius: 20px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
+    .tentang-text { max-width: 550px; }
+    .tentang-text h2 { color: #b63b6f; margin-bottom: 15px; font-size: 2rem; }
+    .tentang-text p { color: #555; line-height: 1.7; font-size: 1rem; margin-bottom: 15px; }
+    .tentang-text .highlight { color: #6d1b3b; font-weight: 600; }
 
     /* Produk */
     .products {
@@ -145,6 +148,17 @@
     <button onclick="scrollToProducts()">Belanja Sekarang</button>
   </section>
 
+  <!-- Bagian Video -->
+  <section class="video-section">
+    <h2>Video Lookbook Hijab Fitsay</h2>
+    <div class="video-wrapper">
+      <video controls poster="https://images.unsplash.com/photo-1591083047030-6b4f20e53c6b">
+        <source src="videos/fitsay.mp4" type="video/mp4">
+        Browser Anda tidak mendukung pemutar video.
+      </video>
+    </div>
+  </section>
+
   <!-- Bagian Tentang -->
   <section id="tentang" class="tentang">
     <img src="https://images.unsplash.com/photo-1606813902622-c4b2b6a29f6a" alt="Model Hijab Elegan">
@@ -196,5 +210,11 @@
     <p>Hubungi kami di: <a href="mailto:hijabfitsay@gmail.com" style="color:#fff">hijabfitsay@gmail.com</a></p>
     <p>© 2025 Hijab Fitsay | Desain oleh Fitri</p>
   </footer>
+
+  <script>
+    function scrollToProducts() {
+      document.getElementById("produk").scrollIntoView({ behavior: "smooth" });
+    }
+  </script>
 </body>
 </html>
