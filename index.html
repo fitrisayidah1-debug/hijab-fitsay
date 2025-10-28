@@ -6,212 +6,97 @@
   <title>Hijab Fitsay | Elegan & Modern</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-    body {
-      background-color: #fffafc;
-      color: #333;
-      scroll-behavior: smooth;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background-color: #fffafc; color: #333; scroll-behavior: smooth; }
+
     header {
       background: linear-gradient(90deg, #f3c2d3, #f9e1e7);
       padding: 1rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: flex; justify-content: space-between; align-items: center;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      position: sticky; top: 0; z-index: 10;
     }
-    header h1 {
-      font-weight: 600;
-      color: #6d1b3b;
-      letter-spacing: 1px;
-    }
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    nav a {
-      text-decoration: none;
-      color: #6d1b3b;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-    nav a:hover {
-      color: #b63b6f;
-    }
+    header h1 { font-weight: 600; color: #6d1b3b; letter-spacing: 1px; }
+    nav { display: flex; align-items: center; gap: 20px; }
+    nav a { text-decoration: none; color: #6d1b3b; font-weight: 500; transition: 0.3s; }
+    nav a:hover { color: #b63b6f; }
+
     .cart-icon {
-      background-color: #ff4c86;
-      color: white;
-      font-weight: bold;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-      transition: 0.3s;
-      position: relative;
+      background-color: #ff4c86; color: white; font-weight: bold; border-radius: 50%;
+      width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;
+      cursor: pointer; box-shadow: 0 3px 6px rgba(0,0,0,0.2); transition: 0.3s; position: relative;
     }
-    .cart-icon:hover {
-      transform: scale(1.1);
-    }
+    .cart-icon:hover { transform: scale(1.1); }
     .cart-count {
-      background: white;
-      color: #ff4c86;
-      font-size: 12px;
-      border-radius: 50%;
-      padding: 2px 6px;
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      font-weight: bold;
+      background: white; color: #ff4c86; font-size: 12px; border-radius: 50%;
+      padding: 2px 6px; position: absolute; top: -5px; right: -5px; font-weight: bold;
     }
+
     .hero {
-      text-align: center;
-      padding: 100px 20px;
+      text-align: center; padding: 100px 20px;
       background: linear-gradient(to right, #ffe0ec, #fff8fb);
     }
-    .hero h2 {
-      font-size: 2.5rem;
-      color: #b63b6f;
-      margin-bottom: 10px;
-    }
-    .hero p {
-      font-size: 1.1rem;
-      color: #555;
-      max-width: 600px;
-      margin: 0 auto 30px;
-    }
+    .hero h2 { font-size: 2.5rem; color: #b63b6f; margin-bottom: 10px; }
+    .hero p { font-size: 1.1rem; color: #555; max-width: 600px; margin: 0 auto 30px; }
     .hero button {
-      background-color: #b63b6f;
-      color: white;
-      border: none;
-      padding: 12px 30px;
-      font-size: 1rem;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: 0.3s;
+      background-color: #b63b6f; color: white; border: none;
+      padding: 12px 30px; font-size: 1rem; border-radius: 30px;
+      cursor: pointer; transition: 0.3s;
     }
-    .hero button:hover {
-      background-color: #6d1b3b;
-    }
-    .section-title {
-      text-align: center;
-      margin-top: 60px;
-      font-size: 2rem;
-      color: #b63b6f;
-    }
+    .hero button:hover { background-color: #6d1b3b; }
+
+    .section-title { text-align: center; margin-top: 60px; font-size: 2rem; color: #b63b6f; }
+
     .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      padding: 50px;
-      max-width: 1100px;
-      margin: auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px; padding: 50px; max-width: 1100px; margin: auto;
     }
     .product-card {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: transform 0.3s;
+      background: white; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden; transition: transform 0.3s;
     }
-    .product-card:hover {
-      transform: translateY(-5px);
-    }
-    .product-card img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-    }
-    .product-info {
-      padding: 15px;
-      text-align: center;
-    }
-    .product-info h3 {
-      color: #6d1b3b;
-      margin-bottom: 5px;
-    }
-    .product-info p {
-      color: #777;
-      margin-bottom: 10px;
-    }
+    .product-card:hover { transform: translateY(-5px); }
+    .product-card img { width: 100%; height: 280px; object-fit: cover; }
+    .product-info { padding: 15px; text-align: center; }
+    .product-info h3 { color: #6d1b3b; margin-bottom: 5px; }
+    .product-info p { color: #777; margin-bottom: 10px; }
     .product-info button {
-      background-color: #b63b6f;
-      color: white;
-      border: none;
-      padding: 8px 20px;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: 0.3s;
-      margin: 5px;
+      background-color: #b63b6f; color: white; border: none;
+      padding: 8px 20px; border-radius: 25px; cursor: pointer;
+      transition: 0.3s; margin: 5px;
     }
-    .product-info button:hover {
-      background-color: #6d1b3b;
-    }
+    .product-info button:hover { background-color: #6d1b3b; }
+
     .cart-modal {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-      width: 90%;
-      max-width: 400px;
-      display: none;
-      z-index: 20;
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      background: white; padding: 20px; border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2); width: 90%; max-width: 400px;
+      display: none; z-index: 20;
     }
-    .cart-modal h3 {
-      color: #b63b6f;
-      margin-bottom: 10px;
-    }
-    .cart-items {
-      max-height: 200px;
-      overflow-y: auto;
-      margin-bottom: 15px;
-    }
+    .cart-modal h3 { color: #b63b6f; margin-bottom: 10px; text-align: center; }
+    .cart-items { max-height: 200px; overflow-y: auto; margin-bottom: 15px; }
     .cart-modal button {
-      background-color: #ff4c86;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 10px;
-      cursor: pointer;
+      background-color: #ff4c86; color: white; border: none;
+      padding: 8px 15px; border-radius: 10px; cursor: pointer;
+      transition: 0.3s; display: block; margin: 10px auto;
     }
+    .cart-modal button:hover { background-color: #b63b6f; }
     .payment input, .payment textarea {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 8px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      width: 100%; padding: 8px; margin-bottom: 8px;
+      border: 1px solid #ccc; border-radius: 8px;
     }
+
     footer {
-      background: #6d1b3b;
-      color: #fff;
-      text-align: center;
-      padding: 25px;
-      margin-top: 50px;
+      background: #6d1b3b; color: #fff; text-align: center;
+      padding: 25px; margin-top: 50px;
     }
     footer .social-icons img {
-      width: 30px;
-      margin: 0 8px;
-      vertical-align: middle;
-      transition: 0.3s;
+      width: 38px; margin: 0 10px; vertical-align: middle;
+      border-radius: 50%; transition: 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.4);
     }
     footer .social-icons img:hover {
-      transform: scale(1.2);
+      transform: scale(1.2) rotate(5deg);
+      box-shadow: 0 3px 12px rgba(255,255,255,0.5);
     }
   </style>
 </head>
@@ -279,19 +164,15 @@
       <label><input type="radio" name="payment" value="E-Wallet"> E-Wallet (Dana/OVO/Gopay)</label><br>
       <label><input type="radio" name="payment" value="COD"> Bayar di Tempat (COD)</label>
     </div>
+    <button onclick="sendOrder()">Kirim Sekarang</button>
     <button onclick="closeCart()">Tutup</button>
   </div>
 
-  <section id="tentang" class="about fade-in">
-    <h2>Tentang Hijab Fitsay</h2>
-    <p>Hijab Fitsay merupakan brand hijab lokal yang menghadirkan kenyamanan dan keanggunan dalam setiap balutan kain. Kami percaya bahwa setiap wanita berhak merasa cantik, elegan, dan berkelas — tanpa mengorbankan kenyamanan.</p>
-  </section>
-
   <footer id="kontak">
     <div class="social-icons">
-      <a href="https://www.instagram.com/hijabfitsay" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram"></a>
-      <a href="https://www.tiktok.com/@hijabfitsay" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TikTok"></a>
-      <a href="https://wa.me/6281234567890" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a>
+      <a href="https://www.instagram.com/si_sayidah?igsh=Z2h0YW9lajlybnB3" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+      <a href="https://www.tiktok.com/@sanskerta09?_t=ZS-90vUNgTVxv0&_r=1" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046128.png" alt="TikTok"></a>
+      <a href="https://wa.me/qr/J6GIGWQFZRQAE1" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" style="background:#25D366;padding:5px;"></a>
     </div>
     <p>Hubungi kami di: <a href="mailto:hijabfitsay@gmail.com">hijabfitsay@gmail.com</a></p>
     <p>© 2025 Hijab Fitsay | Desain oleh Fitri</p>
@@ -317,10 +198,15 @@
     function buyNow(name, price) {
       addToCart(name, price);
       cartModal.style.display = 'block';
+      showCart();
     }
 
     cartBtn.addEventListener('click', () => {
       cartModal.style.display = 'block';
+      showCart();
+    });
+
+    function showCart() {
       cartItems.innerHTML = "";
       if (cart.length === 0) {
         cartItems.innerHTML = "<p>Keranjang masih kosong.</p>";
@@ -329,10 +215,23 @@
           cartItems.innerHTML += `<p>${index + 1}. ${item.name} - Rp ${item.price.toLocaleString()}</p>`;
         });
       }
-    });
+    }
 
-    function closeCart() {
-      cartModal.style.display = 'none';
+    function closeCart() { cartModal.style.display = 'none'; }
+
+    function sendOrder() {
+      const nama = document.getElementById('nama').value.trim();
+      const alamat = document.getElementById('alamat').value.trim();
+      const hp = document.getElementById('hp').value.trim();
+
+      if (!nama || !alamat || !hp) {
+        alert("Harap isi semua data pelanggan sebelum mengirim!");
+        return;
+      }
+      alert("🎉 Pembelian Sukses!\nTerima kasih, " + nama + " 💕\nPesananmu sedang diproses.");
+      cart.length = 0;
+      cartCount.textContent = "0";
+      closeCart();
     }
   </script>
 </body>
