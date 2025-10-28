@@ -154,6 +154,7 @@
       <h3>Keranjang Belanja</h3>
       <ul id="cartItems"></ul>
       <p id="totalPrice"></p>
+      <button onclick="checkoutFromCart()">Checkout</button>
       <button onclick="closeCart()">Tutup</button>
     </div>
   </div>
@@ -201,18 +202,54 @@
 
   <script>
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    function saveCart() { localStorage.setItem('cart', JSON.stringify(cart)); document.getElementById('cartCount').textContent = cart.length; }
-    function addToCart(name, price){ cart.push({name, price}); saveCart(); alert(name+" berhasil ditambahkan ke keranjang!"); }
-    function removeFromCart(index){ cart.splice(index,1); saveCart(); showCart(); }
+    function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      document.getElementById('cartCount').textContent = cart.length;
+    }
+
+    function addToCart(name, price){
+      cart.push({name, price});
+      saveCart();
+      alert(name+" berhasil ditambahkan ke keranjang!");
+    }
+
+    function removeFromCart(index){
+      cart.splice(index,1);
+      saveCart();
+      showCart();
+    }
+
     function showCart(){
-      const popup=document.getElementById('cartPopup'); popup.style.display='flex';
-      const list=document.getElementById('cartItems'); list.innerHTML=''; let total=0;
-      cart.forEach((item,index)=>{ list.innerHTML+=`<li>${item.name} - Rp ${item.price.toLocaleString()} <button onclick="removeFromCart(${index})">Hapus</button></li>`; total+=item.price; });
+      const popup=document.getElementById('cartPopup'); 
+      popup.style.display='flex';
+      const list=document.getElementById('cartItems'); 
+      list.innerHTML=''; 
+      let total=0;
+      cart.forEach((item,index)=>{
+        list.innerHTML+=`<li>${item.name} - Rp ${item.price.toLocaleString()} 
+          <button onclick="removeFromCart(${index})">Hapus</button></li>`;
+        total+=item.price;
+      });
       document.getElementById('totalPrice').textContent="Total: Rp "+total.toLocaleString();
     }
-    document.getElementById('cartBtn').onclick=showCart; function closeCart(){ document.getElementById('cartPopup').style.display='none'; }
-    function beliSekarang(name,price){ cart.push({name,price}); saveCart(); document.getElementById('checkoutPopup').style.display='flex'; }
+
+    function checkoutFromCart(){
+      if(cart.length === 0){ alert("Keranjang kosong!"); return; }
+      closeCart();
+      document.getElementById('checkoutPopup').style.display='flex';
+    }
+
+    document.getElementById('cartBtn').onclick = showCart;
+    function closeCart(){ document.getElementById('cartPopup').style.display='none'; }
+
+    function beliSekarang(name,price){ 
+      cart.push({name,price});
+      saveCart();
+      document.getElementById('checkoutPopup').style.display='flex'; 
+    }
+
     function closeCheckout(){ document.getElementById('checkoutPopup').style.display='none'; }
+
     document.getElementById('checkoutForm').onsubmit=function(e){
       e.preventDefault();
       const nama=document.getElementById('nama').value;
@@ -223,13 +260,15 @@
       cart.forEach(item=>{ listProduk+=`<li>${item.name} - Rp ${item.price.toLocaleString()}</li>`; total+=item.price; });
       listProduk+="</ul>";
       document.getElementById('notaDetail').innerHTML=`<p><strong>Nama:</strong> ${nama}</p>
-      <p><strong>Alamat:</strong> ${alamat}</p>
-      <p><strong>No. Telepon:</strong> ${telepon}</p>
-      <p><strong>Metode Pembayaran:</strong> ${metode}</p>
-      <h4>Produk:</h4>${listProduk}<p><strong>Total:</strong> Rp ${total.toLocaleString()}</p>`;
+        <p><strong>Alamat:</strong> ${alamat}</p>
+        <p><strong>No. Telepon:</strong> ${telepon}</p>
+        <p><strong>Metode Pembayaran:</strong> ${metode}</p>
+        <h4>Produk:</h4>${listProduk}<p><strong>Total:</strong> Rp ${total.toLocaleString()}</p>`;
       cart=[]; saveCart(); closeCheckout(); document.getElementById('notaPopup').style.display='flex';
     }
+
     function closeNota(){ document.getElementById('notaPopup').style.display='none'; }
+
     function scrollToProducts(){ document.getElementById('produk').scrollIntoView({behavior:'smooth'}); }
   </script>
 </body>
