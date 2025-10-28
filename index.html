@@ -1,6 +1,6 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="id">
-<head> 
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hijab Fitsay | Elegan & Modern</title>
@@ -16,7 +16,13 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       position: sticky; top: 0; z-index: 10;
     }
-    header h1 { font-weight: 600; color: #6d1b3b; letter-spacing: 1px; }
+    header h1 {
+      font-weight: 600; color: #6d1b3b; display: flex; align-items: center; gap: 10px;
+    }
+    header img {
+      width: 40px; height: 40px; border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
     nav { display: flex; align-items: center; gap: 20px; }
     nav a { text-decoration: none; color: #6d1b3b; font-weight: 500; transition: 0.3s; }
     nav a:hover { color: #b63b6f; }
@@ -47,6 +53,41 @@
 
     .section-title { text-align: center; margin-top: 60px; font-size: 2rem; color: #b63b6f; }
 
+    /* Tentang Section */
+    .tentang {
+      background: linear-gradient(to right, #fff8fb, #ffe0ec);
+      padding: 60px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      text-align: left;
+    }
+    .tentang img {
+      width: 320px; border-radius: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    .tentang-text {
+      max-width: 550px;
+    }
+    .tentang-text h2 {
+      color: #b63b6f;
+      margin-bottom: 15px;
+      font-size: 2rem;
+    }
+    .tentang-text p {
+      color: #555;
+      line-height: 1.7;
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+    .tentang-text .highlight {
+      color: #6d1b3b;
+      font-weight: 600;
+    }
+
+    /* Produk */
     .products {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 25px; padding: 50px; max-width: 1100px; margin: auto;
@@ -67,25 +108,6 @@
     }
     .product-info button:hover { background-color: #6d1b3b; }
 
-    .cart-modal {
-      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      background: white; padding: 20px; border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.2); width: 90%; max-width: 400px;
-      display: none; z-index: 20;
-    }
-    .cart-modal h3 { color: #b63b6f; margin-bottom: 10px; text-align: center; }
-    .cart-items { max-height: 200px; overflow-y: auto; margin-bottom: 15px; }
-    .cart-modal button {
-      background-color: #ff4c86; color: white; border: none;
-      padding: 8px 15px; border-radius: 10px; cursor: pointer;
-      transition: 0.3s; display: block; margin: 10px auto;
-    }
-    .cart-modal button:hover { background-color: #b63b6f; }
-    .payment input, .payment textarea {
-      width: 100%; padding: 8px; margin-bottom: 8px;
-      border: 1px solid #ccc; border-radius: 8px;
-    }
-
     footer {
       background: #6d1b3b; color: #fff; text-align: center;
       padding: 25px; margin-top: 50px;
@@ -102,7 +124,10 @@
 </head>
 <body>
   <header>
-    <h1>Hijab Fitsay</h1>
+    <h1>
+      <img src="https://cdn-icons-png.flaticon.com/512/4165/4165682.png" alt="Hijab Icon">
+      Hijab Fitsay
+    </h1>
     <nav>
       <a href="#home">Beranda</a>
       <a href="#produk">Koleksi</a>
@@ -114,21 +139,32 @@
     </nav>
   </header>
 
-  <section id="home" class="hero fade-in">
+  <section id="home" class="hero">
     <h2>Tampil Anggun & Elegan dengan Hijab Fitsay</h2>
     <p>Hijab Fitsay hadir dengan desain lembut dan warna pastel untuk menemani harimu dengan penuh percaya diri dan keanggunan.</p>
     <button onclick="scrollToProducts()">Belanja Sekarang</button>
   </section>
 
-  <h2 id="produk" class="section-title fade-in">Koleksi Terbaru</h2>
-  <section class="products fade-in">
+  <!-- Bagian Tentang -->
+  <section id="tentang" class="tentang">
+    <img src="https://images.unsplash.com/photo-1606813902622-c4b2b6a29f6a" alt="Model Hijab Elegan">
+    <div class="tentang-text">
+      <h2>Tentang Hijab Fitsay</h2>
+      <p><span class="highlight">Hijab Fitsay</span> lahir dari keinginan untuk menghadirkan keanggunan dalam setiap balutan hijab. Kami percaya bahwa setiap wanita berhak tampil cantik, percaya diri, dan tetap nyaman dalam gaya yang sederhana namun menawan.</p>
+      <p>Dibuat dari bahan berkualitas tinggi dengan sentuhan warna pastel yang lembut, setiap koleksi Fitsay dirancang untuk menemani langkahmu—baik dalam aktivitas harian maupun acara spesial.</p>
+      <p>Karena bagi kami, hijab bukan sekadar penutup kepala, tetapi <span class="highlight">simbol keindahan hati dan ketulusan diri</span>.</p>
+    </div>
+  </section>
+
+  <h2 id="produk" class="section-title">Koleksi Terbaru</h2>
+  <section class="products">
     <div class="product-card">
       <img src="images/gambar1.jpeg" alt="Hijab Pastel">
       <div class="product-info">
         <h3>Hijab Pastel Blossom</h3>
         <p>Rp 89.000</p>
-        <button onclick="addToCart('Hijab Pastel Blossom', 89000)">Tambah ke Keranjang</button>
-        <button onclick="buyNow('Hijab Pastel Blossom', 89000)">Beli Sekarang</button>
+        <button>Tambah ke Keranjang</button>
+        <button>Beli Sekarang</button>
       </div>
     </div>
     <div class="product-card">
@@ -136,8 +172,8 @@
       <div class="product-info">
         <h3>Hijab Soft Cream</h3>
         <p>Rp 75.000</p>
-        <button onclick="addToCart('Hijab Soft Cream', 75000)">Tambah ke Keranjang</button>
-        <button onclick="buyNow('Hijab Soft Cream', 75000)">Beli Sekarang</button>
+        <button>Tambah ke Keranjang</button>
+        <button>Beli Sekarang</button>
       </div>
     </div>
     <div class="product-card">
@@ -145,94 +181,20 @@
       <div class="product-info">
         <h3>Hijab Dusty Pink</h3>
         <p>Rp 95.000</p>
-        <button onclick="addToCart('Hijab Dusty Pink', 95000)">Tambah ke Keranjang</button>
-        <button onclick="buyNow('Hijab Dusty Pink', 95000)">Beli Sekarang</button>
+        <button>Tambah ke Keranjang</button>
+        <button>Beli Sekarang</button>
       </div>
     </div>
   </section>
 
-  <div class="cart-modal" id="cartModal">
-    <h3>Keranjang Belanja</h3>
-    <div class="cart-items" id="cartItems"></div>
-    <div class="payment">
-      <h4>Data Pelanggan:</h4>
-      <input type="text" id="nama" placeholder="Nama Lengkap">
-      <textarea id="alamat" placeholder="Alamat Lengkap"></textarea>
-      <input type="text" id="hp" placeholder="Nomor HP">
-      <h4>Metode Pembayaran:</h4>
-      <label><input type="radio" name="payment" value="Transfer Bank"> Transfer Bank</label><br>
-      <label><input type="radio" name="payment" value="E-Wallet"> E-Wallet (Dana/OVO/Gopay)</label><br>
-      <label><input type="radio" name="payment" value="COD"> Bayar di Tempat (COD)</label>
-    </div>
-    <button onclick="sendOrder()">Kirim Sekarang</button>
-    <button onclick="closeCart()">Tutup</button>
-  </div>
-
   <footer id="kontak">
     <div class="social-icons">
-      <a href="https://www.instagram.com/si_sayidah?igsh=Z2h0YW9lajlybnB3" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
-      <a href="https://www.tiktok.com/@sanskerta09?_t=ZS-90vUNgTVxv0&_r=1" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046128.png" alt="TikTok"></a>
+      <a href="https://www.instagram.com/si_sayidah" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+      <a href="https://www.tiktok.com/@sanskerta09" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046128.png" alt="TikTok"></a>
       <a href="https://wa.me/qr/J6GIGWQFZRQAE1" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" style="background:#25D366;padding:5px;"></a>
     </div>
-    <p>Hubungi kami di: <a href="mailto:hijabfitsay@gmail.com">hijabfitsay@gmail.com</a></p>
+    <p>Hubungi kami di: <a href="mailto:hijabfitsay@gmail.com" style="color:#fff">hijabfitsay@gmail.com</a></p>
     <p>© 2025 Hijab Fitsay | Desain oleh Fitri</p>
   </footer>
-
-  <script>
-    const cart = [];
-    const cartBtn = document.getElementById('cartBtn');
-    const cartModal = document.getElementById('cartModal');
-    const cartItems = document.getElementById('cartItems');
-    const cartCount = document.getElementById('cartCount');
-
-    function scrollToProducts() {
-      document.getElementById('produk').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function addToCart(name, price) {
-      cart.push({ name, price });
-      cartCount.textContent = cart.length;
-      alert(name + " berhasil ditambahkan ke keranjang!");
-    }
-
-    function buyNow(name, price) {
-      addToCart(name, price);
-      cartModal.style.display = 'block';
-      showCart();
-    }
-
-    cartBtn.addEventListener('click', () => {
-      cartModal.style.display = 'block';
-      showCart();
-    });
-
-    function showCart() {
-      cartItems.innerHTML = "";
-      if (cart.length === 0) {
-        cartItems.innerHTML = "<p>Keranjang masih kosong.</p>";
-      } else {
-        cart.forEach((item, index) => {
-          cartItems.innerHTML += `<p>${index + 1}. ${item.name} - Rp ${item.price.toLocaleString()}</p>`;
-        });
-      }
-    }
-
-    function closeCart() { cartModal.style.display = 'none'; }
-
-    function sendOrder() {
-      const nama = document.getElementById('nama').value.trim();
-      const alamat = document.getElementById('alamat').value.trim();
-      const hp = document.getElementById('hp').value.trim();
-
-      if (!nama || !alamat || !hp) {
-        alert("Harap isi semua data pelanggan sebelum mengirim!");
-        return;
-      }
-      alert("🎉 Pembelian Sukses!\nTerima kasih, " + nama + " 💕\nPesananmu sedang diproses.");
-      cart.length = 0;
-      cartCount.textContent = "0";
-      closeCart();
-    }
-  </script>
 </body>
 </html>
