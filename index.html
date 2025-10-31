@@ -570,14 +570,13 @@ Produk:
    Petals generator — Bunga Rose Gold
    ========================= */
  const petalsContainer = document.getElementById('petals');
-
     const FLOWERS = [
       `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'>
          <defs>
            <linearGradient id='grad1' x1='0%' y1='0%' x2='100%' y2='100%'>
-             <stop offset='0%' stop-color='%23fbe8e7'/>
-             <stop offset='50%' stop-color='%23f6d1c1'/>
-             <stop offset='100%' stop-color='%23b76b56'/>
+             <stop offset='0%' stop-color='%23fff1e6'/>
+             <stop offset='50%' stop-color='%23f9d6b4'/>
+             <stop offset='100%' stop-color='%23b77c4c'/>
            </linearGradient>
            <filter id='glow'>
              <feDropShadow dx='0' dy='0' stdDeviation='2' flood-color='%23ffd9b3'/>
@@ -595,7 +594,7 @@ Produk:
 
       const scale = Math.random() * 0.8 + 0.4;
       const startLeft = Math.random() * 110 - 5;
-      const size = 15 + Math.random()*35;
+      const size = 10 + Math.random()*40;
       el.style.width = size * scale + 'px';
       el.style.height = size * scale + 'px';
       el.style.left = startLeft + 'vw';
@@ -608,7 +607,7 @@ Produk:
       const duration = 12000 + Math.random()*10000;
       const start = performance.now();
       const startX = (startLeft/100) * window.innerWidth;
-      const amplitude = 40 + Math.random()*120;
+      const amplitude = 30 + Math.random()*120;
       const phase = Math.random()*Math.PI*2;
       const shimmer = Math.random() * 0.5 + 0.3;
 
@@ -626,7 +625,6 @@ Produk:
       requestAnimationFrame(animate);
     }
 
-    // spawn petals continuously
     setInterval(()=> spawnFlower(), 180); 
     for(let i=0;i<40;i++) setTimeout(spawnFlower, i*100);
   </script>
