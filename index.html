@@ -569,71 +569,66 @@ Produk:
 /* =========================
    Petals generator — Bunga Rose Gold
    ========================= */
-const petalsContainer = document.getElementById('petals');
+ const petalsContainer = document.getElementById('petals');
 
-const FLOWERS = [
-  `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'>
-     <defs>
-       <linearGradient id='grad1' x1='0%' y1='0%' x2='100%' y2='100%'>
-         <stop offset='0%' stop-color='%23fbe8e7'/>
-         <stop offset='50%' stop-color='%23f6d1c1'/>
-         <stop offset='100%' stop-color='%23b76b56'/>
-       </linearGradient>
-       <filter id='glow'>
-         <feDropShadow dx='0' dy='0' stdDeviation='2' flood-color='%23ffd9b3'/>
-       </filter>
-     </defs>
-     <path fill='url(%23grad1)' filter='url(%23glow)' d='M18 0 C12 6 4 6 1 18 C6 16 11 23 18 36 C25 23 30 16 35 18 C32 6 24 6 18 0Z'/>
-   </svg>`
-];
+    const FLOWERS = [
+      `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'>
+         <defs>
+           <linearGradient id='grad1' x1='0%' y1='0%' x2='100%' y2='100%'>
+             <stop offset='0%' stop-color='%23fbe8e7'/>
+             <stop offset='50%' stop-color='%23f6d1c1'/>
+             <stop offset='100%' stop-color='%23b76b56'/>
+           </linearGradient>
+           <filter id='glow'>
+             <feDropShadow dx='0' dy='0' stdDeviation='2' flood-color='%23ffd9b3'/>
+           </filter>
+         </defs>
+         <path fill='url(%23grad1)' filter='url(%23glow)' d='M18 0 C12 6 4 6 1 18 C6 16 11 23 18 36 C25 23 30 16 35 18 C32 6 24 6 18 0Z'/>
+       </svg>`
+    ];
 
-function spawnFlower(){
-  const el = document.createElement('div'); 
-  el.className='petal';
-  const svg = FLOWERS[Math.floor(Math.random()*FLOWERS.length)];
-  el.style.backgroundImage = `url("data:image/svg+xml;utf8,${encodeURIComponent(svg)}")`;
+    function spawnFlower(){
+      const el = document.createElement('div'); 
+      el.className='petal';
+      const svg = FLOWERS[Math.floor(Math.random()*FLOWERS.length)];
+      el.style.backgroundImage = `url("data:image/svg+xml;utf8,${encodeURIComponent(svg)}")`;
 
-  const scale = Math.random() * 0.7 + 0.5;
-  const startLeft = Math.random() * 110 - 5;
-  const size = 20 + Math.random()*40;
-  el.style.width = size * scale + 'px';
-  el.style.height = size * scale + 'px';
-  el.style.left = startLeft + 'vw';
-  el.style.top = '-20vh';
-  el.style.opacity = 0.4 + Math.random()*0.6;
-  el.style.filter = `blur(${Math.random()*1.5}px) drop-shadow(0 0 6px #ffd9b3)`;
+      const scale = Math.random() * 0.8 + 0.4;
+      const startLeft = Math.random() * 110 - 5;
+      const size = 15 + Math.random()*35;
+      el.style.width = size * scale + 'px';
+      el.style.height = size * scale + 'px';
+      el.style.left = startLeft + 'vw';
+      el.style.top = '-20vh';
+      el.style.opacity = 0.4 + Math.random()*0.6;
+      el.style.filter = `blur(${Math.random()*2}px) drop-shadow(0 0 ${2+Math.random()*4}px #ffd9b3)`;
 
-  petalsContainer.appendChild(el);
+      petalsContainer.appendChild(el);
 
-  const duration = 12000 + Math.random()*12000;
-  const start = performance.now();
-  const startX = (startLeft/100) * window.innerWidth;
-  const amplitude = 50 + Math.random()*120;
-  const phase = Math.random()*Math.PI*2;
-  const shimmer = Math.random() * 0.5 + 0.5;
+      const duration = 12000 + Math.random()*10000;
+      const start = performance.now();
+      const startX = (startLeft/100) * window.innerWidth;
+      const amplitude = 40 + Math.random()*120;
+      const phase = Math.random()*Math.PI*2;
+      const shimmer = Math.random() * 0.5 + 0.3;
 
-  function animate(now){
-    const t = (now - start) / duration;
-    if(t > 1){ el.remove(); return; }
-    const y = (t * (window.innerHeight + 200)) - 50; // jatuh dari atas ke bawah
-    const x = startX + Math.sin(t * 2 * Math.PI + phase) * amplitude;
-    const rot = t * 360 + phase * 20;
-    const flicker = 0.5 + Math.sin(t*15+phase)*shimmer;
-    
-    el.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
-    el.style.opacity = flicker;
-    requestAnimationFrame(animate);
-  }
-  requestAnimationFrame(animate);
-}
+      function animate(now){
+        const t = (now - start) / duration;
+        if(t > 1){ el.remove(); return; }
+        const y = (t * (window.innerHeight + 200)) - 50; 
+        const x = startX + Math.sin(t * 2 * Math.PI + phase) * amplitude;
+        const rot = t * 360 + phase * 20;
+        const flicker = 0.5 + Math.sin(t*15+phase)*shimmer;
+        el.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
+        el.style.opacity = flicker;
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+    }
 
-// spawn flowers continuously
-setInterval(()=> spawnFlower(), 300); 
-for(let i=0;i<30;i++) setTimeout(spawnFlower, i*180);
-
-
-
-
+    // spawn petals continuously
+    setInterval(()=> spawnFlower(), 180); 
+    for(let i=0;i<40;i++) setTimeout(spawnFlower, i*100);
   </script>
 </body>
 </html>
