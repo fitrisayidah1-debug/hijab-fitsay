@@ -260,7 +260,7 @@
       productsGrid.innerHTML = '';
       PRODUCTS.forEach(p=>{
         const card = document.createElement('div'); card.className='card';
-        card.innerHTML = `
+        card.innerHTML = 
           <img src="${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/600x400?text=Image'">
           <div class="info">
             <h3>${p.name}</h3>
@@ -269,7 +269,7 @@
               <button class="btn add" onclick="addToCart(${p.id})">Tambah ke Keranjang</button>
               <button class="btn buy" onclick="buyNow(${p.id})">Beli Sekarang</button>
             </div>
-          </div>`;
+          </div>;
         productsGrid.appendChild(card);
       });
     }
@@ -307,7 +307,7 @@
       cart.forEach((it, idx)=>{
         total += it.price * it.qty;
         const li = document.createElement('li'); li.className='cart-item';
-        li.innerHTML = `
+        li.innerHTML = 
           <img src="${it.img}" onerror="this.src='https://via.placeholder.com/120x120?text=Img'">
           <div style="flex:1">
             <div style="font-weight:700;color:var(--accent)">${it.name}</div>
@@ -321,7 +321,7 @@
             </div>
             <button onclick="removeItem(${idx})" style="background:transparent;border:none;color:#c33;cursor:pointer">Hapus</button>
           </div>
-        `;
+        ;
         cartListEl.appendChild(li);
       });
       cartTotalEl.textContent = rupiah(total);
@@ -333,7 +333,7 @@
       if(exists) exists.qty++;
       else cart.push({ id:p.id, name:p.name, price:p.price, qty:1, img:p.img });
       saveCart();
-      showToast(`${p.name} berhasil ditambahkan ke keranjang`);
+      showToast(${p.name} berhasil ditambahkan ke keranjang);
     }
 
     function buyNow(id){
@@ -371,7 +371,7 @@
       const el = document.getElementById('checkoutItems');
       if(cart.length===0){ el.innerHTML='(Tidak ada item)'; return; }
       let html = '<ul style="padding-left:18px;text-align:left;margin:0">';
-      cart.forEach(it=> html += `<li>${it.name} — ${it.qty} x ${rupiah(it.price)} = <strong>${rupiah(it.qty*it.price)}</strong></li>`);
+      cart.forEach(it=> html += <li>${it.name} — ${it.qty} x ${rupiah(it.price)} = <strong>${rupiah(it.qty*it.price)}</strong></li>);
       html += '</ul>';
       el.innerHTML = html;
     }
@@ -385,15 +385,15 @@
       paymentInstructionEl.style.display = v ? 'block' : 'none';
       if(!v) { paymentInstructionEl.innerHTML=''; return; }
       if(v==='BCA'){
-        paymentInstructionEl.innerHTML = `<strong>Instruksi BCA:</strong><br>Transfer ke: <strong>BCA 123-456-789 a.n. Hijab Fitsay</strong><br>Setelah transfer silakan konfirmasi via WhatsApp.`;
+        paymentInstructionEl.innerHTML = <strong>Instruksi BCA:</strong><br>Transfer ke: <strong>BCA 123-456-789 a.n. Hijab Fitsay</strong><br>Setelah transfer silakan konfirmasi via WhatsApp.;
       } else if(v==='DANA'){
-        paymentInstructionEl.innerHTML = `<strong>Instruksi DANA:</strong><br>Transfer ke nomor <strong>0812-3456-7890 (DANA)</strong>. Konfirmasi via WhatsApp.`;
+        paymentInstructionEl.innerHTML = <strong>Instruksi DANA:</strong><br>Transfer ke nomor <strong>0812-3456-7890 (DANA)</strong>. Konfirmasi via WhatsApp.;
       } else if(v==='OVO'){
-        paymentInstructionEl.innerHTML = `<strong>Instruksi OVO:</strong><br>Transfer ke nomor <strong>0812-3456-7890 (OVO)</strong>. Konfirmasi via WhatsApp.`;
+        paymentInstructionEl.innerHTML = <strong>Instruksi OVO:</strong><br>Transfer ke nomor <strong>0812-3456-7890 (OVO)</strong>. Konfirmasi via WhatsApp.;
       } else if(v==='COD'){
-        paymentInstructionEl.innerHTML = `<strong>COD:</strong><br>Pembayaran dilakukan saat pesanan diterima (Bayar di Tempat).`;
+        paymentInstructionEl.innerHTML = <strong>COD:</strong><br>Pembayaran dilakukan saat pesanan diterima (Bayar di Tempat).;
       } else {
-        paymentInstructionEl.innerHTML = `<strong>Bank Lainnya:</strong><br>Silakan transfer ke rekening lain; konfirmasi via WhatsApp.`;
+        paymentInstructionEl.innerHTML = <strong>Bank Lainnya:</strong><br>Silakan transfer ke rekening lain; konfirmasi via WhatsApp.;
       }
     }
 
@@ -433,10 +433,10 @@
       document.getElementById('afterCheckout').style.display = 'block';
       const area = document.getElementById('confirmationArea');
       let itemsHtml = '<ul style="text-align:left;padding-left:18px">';
-      order.items.forEach(it => itemsHtml += `<li>${it.name} — ${it.qty} x ${rupiah(it.price)} = <strong>${rupiah(it.qty*it.price)}</strong></li>`);
+      order.items.forEach(it => itemsHtml += <li>${it.name} — ${it.qty} x ${rupiah(it.price)} = <strong>${rupiah(it.qty*it.price)}</strong></li>);
       itemsHtml += '</ul>';
 
-      area.innerHTML = `
+      area.innerHTML = 
         <div class="confirmation">
           <h3>Terima kasih — Pesanan Diterima</h3>
           <div class="status">Pesanan Terkonfirmasi ✅</div>
@@ -446,7 +446,7 @@
             <p><strong>No. HP:</strong> ${order.phone}</p>
             <p><strong>Alamat:</strong> ${order.address}</p>
             <p><strong>Metode Pembayaran:</strong> ${order.method}</p>
-            ${order.note ? `<p><strong>Catatan:</strong> ${order.note}</p>` : ''}
+            ${order.note ? <p><strong>Catatan:</strong> ${order.note}</p> : ''}
             <h4>Detail Produk:</h4>
             ${itemsHtml}
             <p style="font-weight:700">Total Pembayaran: ${rupiah(order.total)}</p>
@@ -461,10 +461,10 @@
             <p class="small-note" style="margin-top:10px">Jika WhatsApp tidak langsung membuka pesan, gunakan tombol "Salin Pesan Konfirmasi" lalu buka chat WA toko (atau scan QR) dan paste pesan. Setelah konfirmasi, pesanan akan segera diproses.</p>
           </div>
         </div>
-      `;
+      ;
 
       // prepare messages
-      const plainMsg = `Halo Hijab Fitsay 🌸
+      const plainMsg = Halo Hijab Fitsay 🌸
 Saya ingin konfirmasi pesanan:
 No. Pesanan: ${order.id}
 Nama: ${order.name}
@@ -474,7 +474,7 @@ Metode Pembayaran: ${order.method}
 Total: ${rupiah(order.total)}
 
 Produk:
-` + order.items.map(it => `${it.name} x${it.qty} - ${rupiah(it.price*it.qty)}`).join('\n') + (order.note ? `\n\nCatatan: ${order.note}` : '');
+ + order.items.map(it => ${it.name} x${it.qty} - ${rupiah(it.price*it.qty)}).join('\n') + (order.note ? \n\nCatatan: ${order.note} : '');
 
       const encodedMsg = encodeURIComponent(plainMsg);
 
@@ -482,7 +482,7 @@ Produk:
       document.getElementById('waBtn').onclick = function(){
         if(waNumber && waNumber.trim().length>0){
           // open direct WA with message
-          const url = `https://wa.me/${waNumber}?text=${encodedMsg}`;
+          const url = https://wa.me/${waNumber}?text=${encodedMsg};
           window.open(url, '_blank');
         } else {
           // open QR link and copy message to clipboard
@@ -508,7 +508,7 @@ Produk:
       document.getElementById('printBtn').onclick = function(){
         // open print dialog for the confirmation area only
         const printWindow = window.open('', '_blank', 'width=800,height=600');
-        const html = `
+        const html = 
           <html><head><title>Nota Pesanan ${order.id}</title>
           <style>body{font-family:Times New Roman, serif;padding:20px;color:#222} h1{color:${getComputedStyle(document.documentElement).getPropertyValue('--accent')||'#b76b56'}}</style>
           </head><body>
@@ -522,7 +522,7 @@ Produk:
             ${itemsHtml}
             <h3>Total: ${rupiah(order.total)}</h3>
             <p>Terima kasih — Hijab Fitsay</p>
-          </body></html>`;
+          </body></html>;
         printWindow.document.write(html);
         printWindow.document.close();
         printWindow.focus();
@@ -575,7 +575,7 @@ Produk:
     function spawnPetal(){
       const el = document.createElement('div'); el.className='petal';
       const svg = PETALS[Math.floor(Math.random()*PETALS.length)];
-      el.style.backgroundImage = `url("data:image/svg+xml;utf8,${svg}")`;
+      el.style.backgroundImage = url("data:image/svg+xml;utf8,${svg}");
       const startLeft = Math.random() * 110 - 5; // -5 .. 105 vw
       const size = 12 + Math.random()*30;
       el.style.width = size + 'px'; el.style.height = size + 'px';
@@ -596,7 +596,7 @@ Produk:
         const y = t * (window.innerHeight + 220) - 80;
         const x = startX + Math.sin(t * 2 * Math.PI + phase) * amplitude;
         const rot = t * 720 + phase * 30;
-        el.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
+        el.style.transform = translate(${x}px, ${y}px) rotate(${rot}deg);
         requestAnimationFrame(animate);
       }
       requestAnimationFrame(animate);
@@ -607,4 +607,4 @@ Produk:
 
   </script>
 </body>
-</html>
+</html> 
