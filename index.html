@@ -608,7 +608,7 @@ function spawnPetal(){
   requestAnimationFrame(animate);
 }
 
-// periodically spawn petals
+// periodically spawn petals 
 setInterval(()=>{ spawnPetal(); }, 450);
 for(let i=0;i<12;i++){ setTimeout(spawnPetal, i*300); }
 
