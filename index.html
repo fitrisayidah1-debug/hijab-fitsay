@@ -566,14 +566,17 @@ Produk:
        Petals generator (gold-brown/coklat medok petals)
        ========================= */
     // petals dengan gradasi rose-gold dan efek blur
+/* =========================
+   Petals generator — Bunga Rose Gold
+   ========================= */
 const petalsContainer = document.getElementById('petals');
 
-const PETALS = [
+const FLOWERS = [
   `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'>
      <defs>
        <linearGradient id='grad1' x1='0%' y1='0%' x2='100%' y2='100%'>
-         <stop offset='0%' stop-color='%23f6d1c1'/>
-         <stop offset='50%' stop-color='%23ffd9b3'/>
+         <stop offset='0%' stop-color='%23fbe8e7'/>
+         <stop offset='50%' stop-color='%23f6d1c1'/>
          <stop offset='100%' stop-color='%23b76b56'/>
        </linearGradient>
        <filter id='glow'>
@@ -584,25 +587,25 @@ const PETALS = [
    </svg>`
 ];
 
-function spawnPetal(){
+function spawnFlower(){
   const el = document.createElement('div'); 
   el.className='petal';
-  const svg = PETALS[Math.floor(Math.random()*PETALS.length)];
+  const svg = FLOWERS[Math.floor(Math.random()*FLOWERS.length)];
   el.style.backgroundImage = `url("data:image/svg+xml;utf8,${encodeURIComponent(svg)}")`;
 
-  const scale = Math.random() * 0.8 + 0.6;
+  const scale = Math.random() * 0.7 + 0.5;
   const startLeft = Math.random() * 110 - 5;
   const size = 20 + Math.random()*40;
   el.style.width = size * scale + 'px';
   el.style.height = size * scale + 'px';
   el.style.left = startLeft + 'vw';
-  el.style.top = '-15vh';
-  el.style.opacity = 0.4 + Math.random()*0.5;
+  el.style.top = '-20vh';
+  el.style.opacity = 0.4 + Math.random()*0.6;
   el.style.filter = `blur(${Math.random()*1.5}px) drop-shadow(0 0 6px #ffd9b3)`;
 
   petalsContainer.appendChild(el);
 
-  const duration = 12000 + Math.random()*10000;
+  const duration = 12000 + Math.random()*12000;
   const start = performance.now();
   const startX = (startLeft/100) * window.innerWidth;
   const amplitude = 50 + Math.random()*120;
@@ -612,7 +615,7 @@ function spawnPetal(){
   function animate(now){
     const t = (now - start) / duration;
     if(t > 1){ el.remove(); return; }
-    const y = (Math.sin(t*Math.PI/2) * (window.innerHeight + 300)) - 100;
+    const y = (t * (window.innerHeight + 200)) - 50; // jatuh dari atas ke bawah
     const x = startX + Math.sin(t * 2 * Math.PI + phase) * amplitude;
     const rot = t * 360 + phase * 20;
     const flicker = 0.5 + Math.sin(t*15+phase)*shimmer;
@@ -624,9 +627,10 @@ function spawnPetal(){
   requestAnimationFrame(animate);
 }
 
-// spawn petals
-setInterval(()=> spawnPetal(), 350); 
-for(let i=0;i<25;i++) setTimeout(spawnPetal, i*200);
+// spawn flowers continuously
+setInterval(()=> spawnFlower(), 300); 
+for(let i=0;i<30;i++) setTimeout(spawnFlower, i*180);
+
 
 
 
