@@ -566,6 +566,8 @@ Produk:
        Petals generator (gold-brown/coklat medok petals)
        ========================= */
     // petals dengan gradasi rose-gold dan efek blur
+const petalsContainer = document.getElementById('petals');
+
 const PETALS = [
   `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'>
      <defs>
@@ -588,8 +590,7 @@ function spawnPetal(){
   const svg = PETALS[Math.floor(Math.random()*PETALS.length)];
   el.style.backgroundImage = `url("data:image/svg+xml;utf8,${encodeURIComponent(svg)}")`;
 
-  // depth effect
-  const scale = Math.random() * 0.8 + 0.6; // 0.6 - 1.4
+  const scale = Math.random() * 0.8 + 0.6;
   const startLeft = Math.random() * 110 - 5;
   const size = 20 + Math.random()*40;
   el.style.width = size * scale + 'px';
@@ -611,13 +612,9 @@ function spawnPetal(){
   function animate(now){
     const t = (now - start) / duration;
     if(t > 1){ el.remove(); return; }
-    // jatuh vertikal dengan easing (sinusoidal slow-down)
     const y = (Math.sin(t*Math.PI/2) * (window.innerHeight + 300)) - 100;
-    // gerakan horizontal alami
     const x = startX + Math.sin(t * 2 * Math.PI + phase) * amplitude;
-    // rotasi pelan
     const rot = t * 360 + phase * 20;
-    // shimmer / flicker
     const flicker = 0.5 + Math.sin(t*15+phase)*shimmer;
     
     el.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
@@ -627,7 +624,7 @@ function spawnPetal(){
   requestAnimationFrame(animate);
 }
 
-// spawn cinematic petals
+// spawn petals
 setInterval(()=> spawnPetal(), 350); 
 for(let i=0;i<25;i++) setTimeout(spawnPetal, i*200);
 
