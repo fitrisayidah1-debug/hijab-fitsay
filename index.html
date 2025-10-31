@@ -1,575 +1,610 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Hijab Fitsay — Rose Gold Collection</title>
-<style>
-  /* --- Theme & Fonts --- */
-  :root{
-    --rose-1:#f7e9e6;
-    --rose-2:#f4d7d1;
-    --rose-3:#e9bcb6;
-    --accent:#c77b6b; /* darker rose-gold */
-    --muted:#fff9f8;
-    --card:#ffffff;
-    --text:#222222;
-    --whiteish:rgba(255,255,255,0.92);
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family:"Times New Roman", Times, serif;
-    background:linear-gradient(180deg,var(--muted),#fffefc);
-    color:var(--text);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    overflow-x:hidden;
-  }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hijab Fitsay — Rose Gold Collection</title>
+  <style>
+    :root{
+      --rose-1:#fff6f5;
+      --rose-2:#fff0ee;
+      --rose-3:#f2dcd7;
+      --accent:#b76b56; /* rose-gold accent */
+      --accent-dark:#995242;
+      --card:#ffffff;
+      --muted:#fdf8f7;
+      --text:#222222;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Times New Roman", Times, serif;
+      background:linear-gradient(180deg,var(--muted),#fffefc);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
 
-  /* --- Petals (sakura) container --- */
-  .petals{ position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+    /* petals container */
+    .petals{ position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
 
-  .petal{
-    position:absolute;
-    width:30px; height:30px;
-    background-size:contain; background-repeat:no-repeat;
-    will-change:transform,opacity;
-    opacity:0.95;
-    transform-origin:center;
-    z-index:0;
-  }
+    .petal{
+      position:absolute;
+      width:32px; height:32px;
+      background-size:contain; background-repeat:no-repeat;
+      will-change:transform,opacity; opacity:0.95;
+      transform-origin:center; z-index:0;
+    }
 
-  /* --- Header --- */
-  header{
-    position:sticky; top:0; z-index:25;
-    background:linear-gradient(90deg,var(--whiteish),#fff);
-    backdrop-filter: blur(4px);
-    border-bottom:1px solid rgba(200,150,140,0.08);
-    display:flex; align-items:center; justify-content:space-between;
-    padding:14px 20px;
-    box-shadow:0 6px 18px rgba(0,0,0,0.03);
-  }
-  .brand{display:flex;align-items:center;gap:12px}
-  .brand img{width:54px;height:54px;border-radius:10px;object-fit:cover;box-shadow:0 8px 18px rgba(200,150,140,0.12)}
-  .brand h1{font-size:20px;color:var(--accent);margin:0;letter-spacing:0.6px}
+    /* header */
+    header{
+      position:sticky; top:0; z-index:30;
+      background:linear-gradient(90deg,rgba(255,255,255,0.95),#fff);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 18px; border-bottom:1px solid rgba(185,140,120,0.06);
+      box-shadow:0 6px 20px rgba(0,0,0,0.03);
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand img{width:54px;height:54px;border-radius:12px;object-fit:cover;box-shadow:0 10px 24px rgba(183,104,82,0.10)}
+    .brand h1{font-size:20px;color:var(--accent);margin:0;letter-spacing:0.6px}
 
-  .controls{display:flex;gap:12px;align-items:center}
-  .cart-btn{
-    background:linear-gradient(180deg,var(--accent),#b26452);
-    color:#fff;border:none;border-radius:50%;width:48px;height:48px;display:grid;place-items:center;cursor:pointer;
-    box-shadow:0 8px 20px rgba(183,104,82,0.16);position:relative;font-weight:700;
-  }
-  .cart-count{ position:absolute; top:-6px; right:-6px; background:#fff; color:var(--accent); font-weight:700; padding:4px 7px; border-radius:14px; font-size:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+    .controls{display:flex;gap:12px;align-items:center}
+    .cart-btn{
+      background:linear-gradient(180deg,var(--accent),var(--accent-dark));
+      color:#fff;border:none;border-radius:50%;width:48px;height:48px;display:grid;place-items:center;cursor:pointer;
+      box-shadow:0 10px 26px rgba(183,104,82,0.14);position:relative;font-weight:700;
+    }
+    .cart-count{ position:absolute; top:-8px; right:-8px; background:#fff; color:var(--accent); font-weight:700; padding:4px 8px; border-radius:16px; font-size:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08) }
 
-  /* --- Hero --- */
-  .hero{ text-align:center; padding:68px 18px 36px; position:relative; z-index:2}
-  .hero .title{ font-size:36px; color:var(--accent); margin-bottom:8px; letter-spacing:0.6px; font-weight:700; }
-  .hero .lead{ max-width:760px; margin:0 auto 18px; color:#4a4a4a; line-height:1.65; font-size:18px }
-  .cta{ background:linear-gradient(180deg,var(--accent),#9d5346); color:#fff; border:none; padding:12px 26px; border-radius:28px; font-weight:700; cursor:pointer; box-shadow:0 12px 28px rgba(183,104,82,0.12) }
+    /* hero */
+    .hero{ text-align:center; padding:60px 18px 36px; position:relative; z-index:2 }
+    .hero .title{ font-size:36px; color:var(--accent); margin-bottom:8px; letter-spacing:0.6px; font-weight:700; }
+    .hero .lead{ max-width:760px; margin:0 auto 18px; color:#4a4a4a; line-height:1.65; font-size:18px }
+    .cta{ background:linear-gradient(180deg,var(--accent),var(--accent-dark)); color:#fff; border:none; padding:12px 26px; border-radius:28px; font-weight:700; cursor:pointer; box-shadow:0 12px 30px rgba(183,104,82,0.12) }
 
-  /* --- Layout container & section title --- */
-  .container{ max-width:1180px; margin:30px auto; padding:0 18px; position:relative; z-index:2 }
-  .section-title{ text-align:center; color:var(--accent); font-size:26px; margin-bottom:18px; font-weight:700 }
+    /* container */
+    .container{ max-width:1180px; margin:30px auto; padding:0 18px; position:relative; z-index:2 }
+    .section-title{ text-align:center; color:var(--accent); font-size:26px; margin-bottom:18px; font-weight:700 }
 
-  /* --- Products grid & card --- */
-  .products{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:22px;
-  }
-  .card{
-    background:var(--card);
-    border-radius:14px;
-    overflow:hidden;
-    box-shadow:0 10px 30px rgba(0,0,0,0.06);
-    transition:transform .28s ease, box-shadow .28s ease;
-  }
-  .card:hover{ transform:translateY(-8px); box-shadow:0 18px 44px rgba(0,0,0,0.08) }
-  .card img{ width:100%; height:260px; object-fit:cover; display:block }
-  .card .info{ padding:16px; text-align:center }
-  .card h3{ margin:8px 0; color:var(--accent) }
-  .card p{ margin:6px 0; color:#666 }
-  .actions{ display:flex; gap:10px; justify-content:center; margin-top:10px }
-  .btn{ padding:9px 16px; border-radius:24px; border:none; font-weight:700; cursor:pointer }
-  .btn.add{ background:transparent; border:1px solid var(--accent); color:var(--accent) }
-  .btn.buy{ background:var(--accent); color:#fff }
+    /* products grid */
+    .products{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:20px;
+    }
+    .card{
+      background:var(--card); border-radius:14px; overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,0.06); transition:transform .28s, box-shadow .28s;
+    }
+    .card:hover{ transform:translateY(-8px); box-shadow:0 18px 44px rgba(0,0,0,0.08) }
+    .card img{ width:100%; height:260px; object-fit:cover; display:block }
+    .card .info{ padding:16px; text-align:center }
+    .card h3{ margin:8px 0; color:var(--accent) }
+    .card p{ margin:6px 0; color:#666 }
+    .actions{ display:flex; gap:10px; justify-content:center; margin-top:10px }
+    .btn{ padding:9px 16px; border-radius:24px; border:none; font-weight:700; cursor:pointer }
+    .btn.add{ background:transparent; border:1px solid var(--accent); color:var(--accent) }
+    .btn.buy{ background:var(--accent); color:#fff }
 
-  /* --- Modals (cart & checkout) --- */
-  .modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.45); z-index:60; padding:18px }
-  .panel{ width:100%; max-width:820px; max-height:90vh; overflow:auto; background:var(--card); border-radius:12px; padding:18px; box-shadow:0 24px 80px rgba(0,0,0,0.18) }
-  .cart-list{ list-style:none; padding:0; margin:0 }
-  .cart-item{ display:flex; gap:12px; align-items:center; padding:12px 0; border-bottom:1px dashed #eee }
-  .cart-item img{ width:80px; height:80px; object-fit:cover; border-radius:8px }
-  .qty-control{ display:flex; gap:8px; align-items:center }
-  .qty-control button{ padding:6px 10px; border-radius:8px; border:1px solid #ddd; background:#fafafa; cursor:pointer }
+    /* modals */
+    .modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.45); z-index:60; padding:18px }
+    .panel{ width:100%; max-width:920px; max-height:90vh; overflow:auto; background:var(--card); border-radius:12px; padding:18px; box-shadow:0 24px 80px rgba(0,0,0,0.18) }
+    .cart-list{ list-style:none; padding:0; margin:0 }
+    .cart-item{ display:flex; gap:12px; align-items:center; padding:12px 0; border-bottom:1px dashed #eee }
+    .cart-item img{ width:80px; height:80px; object-fit:cover; border-radius:8px }
+    .qty-control{ display:flex; gap:8px; align-items:center }
+    .qty-control button{ padding:6px 10px; border-radius:8px; border:1px solid #ddd; background:#fafafa; cursor:pointer }
 
-  .total-row{ display:flex; justify-content:space-between; align-items:center; margin-top:12px; font-weight:700 }
+    .total-row{ display:flex; justify-content:space-between; align-items:center; margin-top:12px; font-weight:700 }
 
-  /* --- Checkout form --- */
-  .checkout-form{ display:grid; gap:10px; margin-top:12px }
-  .checkout-form input, .checkout-form textarea, .checkout-form select{ padding:10px; border-radius:8px; border:1px solid #ddd; font-family:inherit }
-  .small-note{ font-size:13px; color:#666 }
+    /* checkout form */
+    .checkout-form{ display:grid; gap:10px; margin-top:12px }
+    .checkout-form input, .checkout-form textarea, .checkout-form select{ padding:10px; border-radius:8px; border:1px solid #ddd; font-family:inherit }
+    .small-note{ font-size:13px; color:#666 }
 
-  /* --- Confirmation area --- */
-  .confirmation { text-align:center; padding:18px }
-  .confirmation h3{ color:var(--accent); margin-bottom:6px }
-  .confirmation .status{ font-weight:700; color:green; margin-bottom:12px }
+    /* confirmation */
+    .confirmation { text-align:center; padding:18px }
+    .confirmation h3{ color:var(--accent); margin-bottom:6px }
+    .confirmation .status{ font-weight:700; color:green; margin-bottom:12px }
 
-  /* --- Footer & social icons (white elegant) --- */
-  footer{ background:linear-gradient(180deg,#8c5b53,#5b2d26); color:#fff; padding:28px 18px; text-align:center; margin-top:36px; position:relative; z-index:2 }
-  .social-icons{ display:flex; gap:12px; justify-content:center; align-items:center; margin-top:10px }
-  .social-icons a{ width:44px; height:44px; display:grid; place-items:center; background:rgba(255,255,255,0.12); border-radius:10px; text-decoration:none; transition:all .2s; color:#fff }
-  .social-icons a svg{ width:22px; height:22px; filter: invert(100%); opacity:0.95 }
-  .social-icons a:hover{ transform:translateY(-4px); background:rgba(255,255,255,0.18) }
+    /* footer */
+    footer{ background:linear-gradient(180deg,#8c5b53,#5b2d26); color:#fff; padding:28px 18px; text-align:center; margin-top:36px; position:relative; z-index:2 }
+    .social-icons{ display:flex; gap:12px; justify-content:center; align-items:center; margin-top:10px }
+    .social-icons a{ width:48px; height:48px; display:grid; place-items:center; background:rgba(255,255,255,0.12); border-radius:12px; text-decoration:none; transition:all .18s; color:#fff }
+    .social-icons a svg{ width:22px; height:22px; filter:invert(100%); opacity:0.95 }
+    .social-icons a:hover{ transform:translateY(-4px); background:rgba(255,255,255,0.18) }
 
-  /* responsive */
-  @media (max-width:680px){
-    .hero .title{ font-size:24px }
-    .card img{ height:200px }
-    .cart-item img{ width:58px; height:58px }
-  }
-
-  /* small helper */
-  .hidden{ display:none }
-</style>
+    /* responsive */
+    @media (max-width:680px){
+      .hero .title{ font-size:24px }
+      .card img{ height:200px }
+      .cart-item img{ width:58px; height:58px }
+    }
+    .hidden{ display:none }
+  </style>
 </head>
 <body>
 
-<!-- petals container -->
-<div class="petals" id="petals"></div>
+  <!-- petals -->
+  <div class="petals" id="petals"></div>
 
-<header>
-  <div class="brand">
-    <img src="imagess/gambar0.jpeg" alt="Logo Hijab Fitsay" onerror="this.src='https://via.placeholder.com/150x150?text=Logo'">
-    <h1>Hijab Fitsay</h1>
-  </div>
-  <div class="controls">
-    <button class="cart-btn" id="cartBtn" aria-label="Buka Keranjang">🛍️<span class="cart-count" id="cartCount">0</span></button>
-  </div>
-</header>
-
-<main>
-  <section class="hero" id="home">
-    <div class="title">Tampil Anggun & Elegan — Rose Gold Collection</div>
-    <p class="lead">Keanggunan lembut dalam setiap lipatan. Pilih hijab berkualitas, warna pastel & rose-gold yang menawan untuk penampilan istimewa.</p>
-    <button class="cta" onclick="scrollToProducts()">Belanja Sekarang</button>
-  </section>
-
-  <section class="container" id="produk">
-    <h2 class="section-title">Koleksi Terbaru</h2>
-    <div class="products" id="productsGrid">
-      <!-- Produk diinject oleh JS -->
+  <!-- header -->
+  <header>
+    <div class="brand">
+      <img src="imagess/gambar0.jpeg" alt="Logo Hijab Fitsay" onerror="this.src='https://via.placeholder.com/150x150?text=Logo'">
+      <h1>Hijab Fitsay</h1>
     </div>
-  </section>
-
-  <!-- Confirmation area (after checkout) -->
-  <section class="container" id="afterCheckout" style="display:none; margin-top:28px;">
-    <div class="panel" id="confirmationArea"></div>
-  </section>
-</main>
-
-<!-- Cart Modal -->
-<div class="modal" id="cartModal" aria-hidden="true">
-  <div class="panel">
-    <h2>Keranjang Belanja</h2>
-    <ul class="cart-list" id="cartList"></ul>
-
-    <div class="total-row">
-      <div>Total:</div>
-      <div id="cartTotal">Rp 0</div>
+    <div class="controls">
+      <button class="cart-btn" id="cartBtn" aria-label="Buka Keranjang">🛍️<span class="cart-count" id="cartCount">0</span></button>
     </div>
+  </header>
 
-    <div style="display:flex;gap:10px;margin-top:14px;justify-content:flex-end">
-      <button class="btn add" id="closeCart">Tutup</button>
-      <button class="btn buy" id="toCheckout">Checkout</button>
-    </div>
-  </div>
-</div>
+  <!-- main -->
+  <main>
+    <section class="hero" id="home">
+      <div class="title">Tampil Anggun & Elegan — Rose Gold Collection</div>
+      <p class="lead">Keanggunan lembut dalam setiap lipatan. Pilih hijab berkualitas, warna pastel & rose-gold yang menawan untuk penampilan istimewa.</p>
+      <button class="cta" onclick="scrollToProducts()">Belanja Sekarang</button>
+    </section>
 
-<!-- Checkout Modal -->
-<div class="modal" id="checkoutModal" aria-hidden="true">
-  <div class="panel">
-    <h2>Form Pembelian</h2>
-    <form id="checkoutForm" class="checkout-form">
-      <input type="text" id="buyerName" placeholder="Nama Lengkap" required />
-      <input type="tel" id="buyerPhone" placeholder="Nomor HP (contoh: 0812xxxxxxx)" required />
-      <textarea id="buyerAddress" placeholder="Alamat Lengkap (jalan, kec, kota)" rows="2" required></textarea>
+    <section class="container" id="produk">
+      <h2 class="section-title">Koleksi Terbaru</h2>
+      <div class="products" id="productsGrid"></div>
+    </section>
 
-      <label class="small-note">Produk & Jumlah (anda bisa ubah jumlah di keranjang juga):</label>
-      <div id="checkoutItems" class="small-note" style="background:#fff8f7;padding:10px;border-radius:8px;border:1px solid #fde6e3"></div>
+    <!-- after checkout confirmation -->
+    <section class="container" id="afterCheckout" style="display:none; margin-top:28px;">
+      <div class="panel" id="confirmationArea"></div>
+    </section>
+  </main>
 
-      <label for="paymentMethod" class="small-note">Pilih Metode Pembayaran:</label>
-      <select id="paymentMethod" required>
-        <option value="">-- Pilih Metode --</option>
-        <option value="BCA">Bank BCA</option>
-        <option value="DANA">DANA</option>
-        <option value="OVO">OVO</option>
-        <option value="COD">COD (Bayar di Tempat)</option>
-        <option value="Bank Lain">Bank Lainnya</option>
-      </select>
+  <!-- cart modal -->
+  <div class="modal" id="cartModal" aria-hidden="true">
+    <div class="panel">
+      <h2>Keranjang Belanja</h2>
+      <ul class="cart-list" id="cartList"></ul>
 
-      <div id="paymentInstruction" class="small-note" style="padding:8px;background:#fff7f7;border-radius:8px;border:1px solid #fde6e3; display:none"></div>
-
-      <label class="small-note">Catatan (opsional):</label>
-      <input id="buyerNote" placeholder="Contoh: minta warna mendekati gambar, kirim pagi hari (opsional)">
-
-      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
-        <button type="button" class="btn add" id="backToCart">Kembali ke Keranjang</button>
-        <button type="submit" class="btn buy">Konfirmasi Pesanan</button>
+      <div class="total-row">
+        <div>Total:</div>
+        <div id="cartTotal">Rp 0</div>
       </div>
-    </form>
-  </div>
-</div>
 
-<footer>
-  <div style="max-width:980px;margin:0 auto">
-    <div style="font-size:14px;opacity:0.95">Ikuti kami</div>
-    <div class="social-icons" style="margin-top:10px">
-      <!-- Instagram -->
-      <a href="https://www.instagram.com/si_sayidah" target="_blank" title="Instagram">
-        <!-- custom white svg instagram -->
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5z" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 11.37a4 4 0 11-7.999.001A4 4 0 0116 11.37z" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 6.5h.01" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <!-- TikTok -->
-      <a href="https://www.tiktok.com/@sanskerta09" target="_blank" title="TikTok">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 8v8a4 4 0 104 4V8h3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <!-- WhatsApp (QR link) -->
-      <a href="https://wa.me/qr/J6GIGWQFZRQAE1" target="_blank" title="WhatsApp">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.1A9 9 0 1111.9 3h.1v3.1A3.9 3.9 0 0016 10.1H21z" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.5 14.5a3.5 3.5 0 01-4.9 0l-.5-.5" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+      <div style="display:flex;gap:10px;margin-top:14px;justify-content:flex-end">
+        <button class="btn add" id="closeCart">Tutup</button>
+        <button class="btn buy" id="toCheckout">Checkout</button>
+      </div>
     </div>
-    <div style="margin-top:12px;font-size:13px;opacity:0.95">© 2025 Hijab Fitsay • Desain oleh Fitri</div>
   </div>
-</footer>
 
-<script>
-/* =========================
-   PRODUCTS DATA (ubah path gambar sesuai milikmu)
-   ========================= */
-const PRODUCTS = [
-  {id:1, name:"Hijab Pastel Blossom", price:89000, img:"images/gambar1.jpeg"},
-  {id:2, name:"Hijab Soft Cream", price:75000, img:"images/gambar2.jpeg"},
-  {id:3, name:"Hijab Dusty Pink", price:95000, img:"images/gambar3.jpeg"},
-  {id:4, name:"Hijab Olive Serenity", price:85000, img:"imagess/hijab0.jpeg"},
-  {id:5, name:"Hijab Sky Mist", price:82000, img:"imagess/hijab1 (3).jpeg"}
-];
+  <!-- checkout modal -->
+  <div class="modal" id="checkoutModal" aria-hidden="true">
+    <div class="panel">
+      <h2>Form Pembelian</h2>
+      <form id="checkoutForm" class="checkout-form">
+        <input type="text" id="buyerName" placeholder="Nama Lengkap" required />
+        <input type="tel" id="buyerPhone" placeholder="Nomor HP (contoh: 0812xxxxxxx)" required />
+        <textarea id="buyerAddress" placeholder="Alamat Lengkap (jalan, kec, kota)" rows="2" required></textarea>
 
-/* =========================
-   Helper: rupiah
-   ========================= */
-const rupiah = v => "Rp " + v.toLocaleString('id-ID');
+        <label class="small-note">Produk & Jumlah (anda bisa ubah jumlah di keranjang juga):</label>
+        <div id="checkoutItems" class="small-note" style="background:#fff8f7;padding:10px;border-radius:8px;border:1px solid #fde6e3"></div>
 
-/* =========================
-   Render products
-   ========================= */
-const productsGrid = document.getElementById('productsGrid');
-function renderProducts(){
-  productsGrid.innerHTML = '';
-  PRODUCTS.forEach(p=>{
-    const card = document.createElement('div'); card.className='card';
-    card.innerHTML = `
-      <img src="${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/600x400?text=Image'">
-      <div class="info">
-        <h3>${p.name}</h3>
-        <p>${rupiah(p.price)}</p>
-        <div class="actions">
-          <button class="btn add" onclick="addToCart(${p.id})">Tambah ke Keranjang</button>
-          <button class="btn buy" onclick="buyNow(${p.id})">Beli Sekarang</button>
+        <label for="paymentMethod" class="small-note">Pilih Metode Pembayaran:</label>
+        <select id="paymentMethod" required>
+          <option value="">-- Pilih Metode --</option>
+          <option value="BCA">Bank BCA</option>
+          <option value="DANA">DANA</option>
+          <option value="OVO">OVO</option>
+          <option value="COD">COD (Bayar di Tempat)</option>
+          <option value="Bank Lain">Bank Lainnya</option>
+        </select>
+
+        <div id="paymentInstruction" class="small-note" style="padding:8px;background:#fff7f7;border-radius:8px;border:1px solid #fde6e3; display:none"></div>
+
+        <label class="small-note">Catatan (opsional):</label>
+        <input id="buyerNote" placeholder="Contoh: minta warna mendekati gambar, kirim pagi hari (opsional)">
+
+        <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+          <button type="button" class="btn add" id="backToCart">Kembali ke Keranjang</button>
+          <button type="submit" class="btn buy">Konfirmasi Pesanan</button>
         </div>
-      </div>`;
-    productsGrid.appendChild(card);
-  });
-}
-renderProducts();
-
-/* =========================
-   CART (localStorage)
-   ========================= */
-let cart = JSON.parse(localStorage.getItem('hf_cart_v2')) || [];
-const cartCountEl = document.getElementById('cartCount');
-const cartModal = document.getElementById('cartModal');
-const checkoutModal = document.getElementById('checkoutModal');
-const cartListEl = document.getElementById('cartList');
-const cartTotalEl = document.getElementById('cartTotal');
-
-function saveCart(){
-  localStorage.setItem('hf_cart_v2', JSON.stringify(cart));
-  updateCartUI();
-}
-
-function updateCartUI(){
-  const totalQty = cart.reduce((s,i)=>s+i.qty,0);
-  cartCountEl.textContent = totalQty;
-  renderCartList();
-}
-
-function renderCartList(){
-  cartListEl.innerHTML = '';
-  if(cart.length===0){
-    cartListEl.innerHTML = '<li class="small-note">Keranjang kosong.</li>';
-    cartTotalEl.textContent = rupiah(0);
-    return;
-  }
-  let total = 0;
-  cart.forEach((it, idx)=>{
-    total += it.price * it.qty;
-    const li = document.createElement('li'); li.className='cart-item';
-    li.innerHTML = `
-      <img src="${it.img}" onerror="this.src='https://via.placeholder.com/120x120?text=Img'">
-      <div style="flex:1">
-        <div style="font-weight:700;color:var(--accent)">${it.name}</div>
-        <div class="small-note">${rupiah(it.price)} x ${it.qty} = ${rupiah(it.price*it.qty)}</div>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
-        <div class="qty-control">
-          <button onclick="changeQty(${idx}, -1)">−</button>
-          <div style="min-width:28px;text-align:center">${it.qty}</div>
-          <button onclick="changeQty(${idx}, 1)">+</button>
-        </div>
-        <button onclick="removeItem(${idx})" style="background:transparent;border:none;color:#c33;cursor:pointer">Hapus</button>
-      </div>
-    `;
-    cartListEl.appendChild(li);
-  });
-  cartTotalEl.textContent = rupiah(total);
-}
-
-/* add to cart */
-function addToCart(id){
-  const p = PRODUCTS.find(x=>x.id===id); if(!p) return;
-  const exists = cart.find(i=>i.id===id);
-  if(exists) exists.qty++;
-  else cart.push({ id:p.id, name:p.name, price:p.price, qty:1, img:p.img });
-  saveCart();
-  showToast(`${p.name} berhasil ditambahkan ke keranjang`);
-}
-
-/* buy now */
-function buyNow(id){
-  const p = PRODUCTS.find(x=>x.id===id); if(!p) return;
-  cart = [{ id:p.id, name:p.name, price:p.price, qty:1, img:p.img }];
-  saveCart();
-  openCheckout();
-}
-
-/* change qty / remove */
-function changeQty(idx, delta){
-  if(!cart[idx]) return;
-  cart[idx].qty += delta;
-  if(cart[idx].qty < 1) cart[idx].qty = 1;
-  saveCart();
-}
-function removeItem(idx){ if(!cart[idx]) return; cart.splice(idx,1); saveCart(); }
-
-/* Cart modal controls */
-document.getElementById('cartBtn').addEventListener('click', ()=>openCart());
-document.getElementById('closeCart').addEventListener('click', ()=>closeCart());
-function openCart(){ renderCartList(); cartModal.style.display='flex'; cartModal.setAttribute('aria-hidden','false'); }
-function closeCart(){ cartModal.style.display='none'; cartModal.setAttribute('aria-hidden','true'); }
-
-/* checkout flow */
-document.getElementById('toCheckout').addEventListener('click', ()=>openCheckout());
-document.getElementById('backToCart').addEventListener('click', ()=>{ checkoutModal.style.display='none'; cartModal.style.display='flex'; });
-
-function openCheckout(){
-  if(cart.length===0){ alert('Keranjang kosong! Silakan tambahkan produk'); return; }
-  cartModal.style.display='none'; checkoutModal.style.display='flex';
-  renderCheckoutItems();
-  updatePaymentInstruction();
-}
-
-/* render checkout items */
-function renderCheckoutItems(){
-  const el = document.getElementById('checkoutItems');
-  if(cart.length===0){ el.innerHTML='(Tidak ada item)'; return; }
-  let html = '<ul style="padding-left:18px;text-align:left;margin:0">';
-  cart.forEach(it=> html += `<li>${it.name} — ${it.qty} x ${rupiah(it.price)} = <strong>${rupiah(it.qty*it.price)}</strong></li>`);
-  html += '</ul>';
-  el.innerHTML = html;
-}
-
-/* payment instruction logic */
-const paymentMethodEl = document.getElementById('paymentMethod');
-const paymentInstructionEl = document.getElementById('paymentInstruction');
-paymentMethodEl.addEventListener('change', updatePaymentInstruction);
-function updatePaymentInstruction(){
-  const v = paymentMethodEl.value;
-  paymentInstructionEl.style.display = v ? 'block' : 'none';
-  if(!v) { paymentInstructionEl.innerHTML=''; return; }
-  if(v==='BCA'){
-    paymentInstructionEl.innerHTML = `<strong>Instruksi BCA:</strong><br>Transfer ke: <strong>BCA 123-456-789 a.n. Hijab Fitsay</strong><br>Setelah transfer silakan konfirmasi via WhatsApp.`;
-  } else if(v==='DANA'){
-    paymentInstructionEl.innerHTML = `<strong>Instruksi DANA:</strong><br>Transfer ke nomor <strong>0812-3456-7890 (DANA)</strong>. Konfirmasi via WhatsApp.`;
-  } else if(v==='OVO'){
-    paymentInstructionEl.innerHTML = `<strong>Instruksi OVO:</strong><br>Transfer ke nomor <strong>0812-3456-7890 (OVO)</strong>. Konfirmasi via WhatsApp.`;
-  } else if(v==='COD'){
-    paymentInstructionEl.innerHTML = `<strong>COD:</strong><br>Pembayaran dilakukan saat pesanan diterima (Bayar di Tempat).`;
-  } else {
-    paymentInstructionEl.innerHTML = `<strong>Bank Lainnya:</strong><br>Silakan transfer ke rekening lain; konfirmasi via WhatsApp.`;
-  }
-}
-
-/* checkout submit */
-document.getElementById('checkoutForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  const name = document.getElementById('buyerName').value.trim();
-  const phone = document.getElementById('buyerPhone').value.trim();
-  const address = document.getElementById('buyerAddress').value.trim();
-  const method = paymentMethodEl.value;
-  const note = document.getElementById('buyerNote').value.trim();
-
-  if(!name || !phone || !address || !method){ alert('Harap lengkapi semua data'); return; }
-  if(cart.length===0){ alert('Keranjang kosong!'); return; }
-
-  let total = 0;
-  cart.forEach(it => total += it.price * it.qty);
-
-  const order = {
-    id: 'HF' + Date.now(),
-    name, phone, address, method, note, items: cart.slice(), total, created: new Date().toISOString()
-  };
-
-  // show confirmation
-  showConfirmation(order);
-
-  // clear cart
-  cart = [];
-  saveCart();
-
-  // close checkout modal
-  checkoutModal.style.display = 'none';
-});
-
-/* show confirmation and WA link (uses QR link provided) */
-function showConfirmation(order){
-  document.getElementById('afterCheckout').style.display = 'block';
-  const area = document.getElementById('confirmationArea');
-  let itemsHtml = '<ul style="text-align:left;padding-left:18px">';
-  order.items.forEach(it => itemsHtml += `<li>${it.name} — ${it.qty} x ${rupiah(it.price)} = <strong>${rupiah(it.qty*it.price)}</strong></li>`);
-  itemsHtml += '</ul>';
-
-  area.innerHTML = `
-    <div class="confirmation">
-      <h3>Terima kasih — Pesanan Diterima</h3>
-      <div class="status">Pesanan Terkonfirmasi ✅</div>
-      <div style="text-align:left;max-width:720px;margin:0 auto;">
-        <p><strong>No. Pesanan:</strong> ${order.id}</p>
-        <p><strong>Nama:</strong> ${order.name}</p>
-        <p><strong>No. HP:</strong> ${order.phone}</p>
-        <p><strong>Alamat:</strong> ${order.address}</p>
-        <p><strong>Metode Pembayaran:</strong> ${order.method}</p>
-        ${order.note ? `<p><strong>Catatan:</strong> ${order.note}</p>` : ''}
-        <h4>Detail Produk:</h4>
-        ${itemsHtml}
-        <p style="font-weight:700">Total Pembayaran: ${rupiah(order.total)}</p>
-
-        <div style="display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap">
-          <a id="waQR" class="btn buy" style="text-decoration:none;color:#fff" target="_blank">Konfirmasi via WhatsApp (Scan QR)</a>
-          <button class="btn add" id="copyMsg">Salin Pesan Konfirmasi</button>
-          <button class="btn add" onclick="printNota()">Cetak / Simpan Nota</button>
-        </div>
-
-        <p class="small-note" style="margin-top:10px">Silakan buka WhatsApp toko melalui tombol "Konfirmasi via WhatsApp (Scan QR)" lalu tempel pesan yang disalin (atau tulis) untuk mempercepat verifikasi.</p>
-      </div>
+      </form>
     </div>
-  `;
+  </div>
 
-  // Prepare message text (readable) and encoded for copy
-  let msgText = `Halo Hijab Fitsay,%0ASaya%20telah%20melakukan%20pemesanan.%0A%0ANoPesanan:%20${order.id}%0ANama:%20${encodeURIComponent(order.name)}%0ANoHP:%20${encodeURIComponent(order.phone)}%0AAlamat:%20${encodeURIComponent(order.address)}%0AMetode:%20${encodeURIComponent(order.method)}%0ATotal:%20${encodeURIComponent(rupiah(order.total))}%0A%0AProduk:%0A`;
-  order.items.forEach(it => {
-    msgText += `${encodeURIComponent(it.name)}%20x${it.qty}%20-%20${encodeURIComponent(rupiah(it.price*it.qty))}%0A`;
-  });
-  if(order.note) msgText += `%0ACatatan:%20${encodeURIComponent(order.note)}%0A`;
+  <!-- footer -->
+  <footer>
+    <div style="max-width:980px;margin:0 auto">
+      <div style="font-size:14px;opacity:0.95">Ikuti kami</div>
+      <div class="social-icons" style="margin-top:10px">
+        <a href="https://www.instagram.com/si_sayidah" target="_blank" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5z" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 11.37a4 4 0 11-7.999.001A4 4 0 0116 11.37z" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 6.5h.01" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@sanskerta09" target="_blank" title="TikTok">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 8v8a4 4 0 104 4V8h3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://wa.me/qr/J6GIGWQFZRQAE1" target="_blank" title="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.1A9 9 0 1111.9 3h.1v3.1A3.9 3.9 0 0016 10.1H21z" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.5 14.5a3.5 3.5 0 01-4.9 0l-.5-.5" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div style="margin-top:12px;font-size:13px;opacity:0.95">© 2025 Hijab Fitsay • Desain oleh Fitri</div>
+    </div>
+  </footer>
 
-  // Set WA QR link (user provided QR link)
-  const waQRLink = 'https://wa.me/qr/J6GIGWQFZRQAE1';
-  document.getElementById('waQR').href = waQRLink;
+  <script>
+    /* =========================
+       CONFIG: set waNumber if you have direct admin number (international format, no +)
+       Example: const waNumber = '6281234567890';
+       If empty, script will open the QR link and copy the message to clipboard.
+       ========================= */
+    const waNumber = ''; // <-- GANTI dengan nomor admin jika ingin pesan WA otomatis langsung (contoh: '6281234567890')
+    const waQRLink = 'https://wa.me/qr/J6GIGWQFZRQAE1';
 
-  // copy button functionality: copy readable message (not encoded) to clipboard
-  document.getElementById('copyMsg').onclick = function(){
-    const plainMsg = `Halo Hijab Fitsay,\nSaya telah melakukan pemesanan.\n\nNoPesanan: ${order.id}\nNama: ${order.name}\nNoHP: ${order.phone}\nAlamat: ${order.address}\nMetode: ${order.method}\nTotal: ${rupiah(order.total)}\n\nProduk:\n` + order.items.map(it => `${it.name} x${it.qty} - ${rupiah(it.price*it.qty)}`).join('\n') + (order.note ? `\n\nCatatan: ${order.note}` : '');
-    navigator.clipboard?.writeText(plainMsg).then(()=> {
-      showToast('Pesan konfirmasi disalin. Silakan buka WhatsApp toko dan paste pesan (atau scan QR).');
-    }, ()=> {
-      // fallback for older browsers
-      prompt('Salin pesan konfirmasi berikut (CTRL+C / CMD+C):', plainMsg);
+    /* =========================
+       Products
+       ========================= */
+    const PRODUCTS = [
+      {id:1, name:"Hijab Pastel Blossom", price:89000, img:"images/gambar1.jpeg"},
+      {id:2, name:"Hijab Soft Cream", price:75000, img:"images/gambar2.jpeg"},
+      {id:3, name:"Hijab Dusty Pink", price:95000, img:"images/gambar3.jpeg"},
+      {id:4, name:"Hijab Olive Serenity", price:85000, img:"imagess/hijab0.jpeg"},
+      {id:5, name:"Hijab Sky Mist", price:82000, img:"imagess/hijab1 (3).jpeg"}
+    ];
+
+    const rupiah = v => "Rp " + v.toLocaleString('id-ID');
+
+    /* render products */
+    const productsGrid = document.getElementById('productsGrid');
+    function renderProducts(){
+      productsGrid.innerHTML = '';
+      PRODUCTS.forEach(p=>{
+        const card = document.createElement('div'); card.className='card';
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/600x400?text=Image'">
+          <div class="info">
+            <h3>${p.name}</h3>
+            <p>${rupiah(p.price)}</p>
+            <div class="actions">
+              <button class="btn add" onclick="addToCart(${p.id})">Tambah ke Keranjang</button>
+              <button class="btn buy" onclick="buyNow(${p.id})">Beli Sekarang</button>
+            </div>
+          </div>`;
+        productsGrid.appendChild(card);
+      });
+    }
+    renderProducts();
+
+    /* =========================
+       Cart (localStorage)
+       ========================= */
+    let cart = JSON.parse(localStorage.getItem('hf_cart_v3')) || [];
+    const cartCountEl = document.getElementById('cartCount');
+    const cartModal = document.getElementById('cartModal');
+    const checkoutModal = document.getElementById('checkoutModal');
+    const cartListEl = document.getElementById('cartList');
+    const cartTotalEl = document.getElementById('cartTotal');
+
+    function saveCart(){
+      localStorage.setItem('hf_cart_v3', JSON.stringify(cart));
+      updateCartUI();
+    }
+
+    function updateCartUI(){
+      const totalQty = cart.reduce((s,i)=>s+i.qty,0);
+      cartCountEl.textContent = totalQty;
+      renderCartList();
+    }
+
+    function renderCartList(){
+      cartListEl.innerHTML = '';
+      if(cart.length===0){
+        cartListEl.innerHTML = '<li class="small-note">Keranjang kosong.</li>';
+        cartTotalEl.textContent = rupiah(0);
+        return;
+      }
+      let total = 0;
+      cart.forEach((it, idx)=>{
+        total += it.price * it.qty;
+        const li = document.createElement('li'); li.className='cart-item';
+        li.innerHTML = `
+          <img src="${it.img}" onerror="this.src='https://via.placeholder.com/120x120?text=Img'">
+          <div style="flex:1">
+            <div style="font-weight:700;color:var(--accent)">${it.name}</div>
+            <div class="small-note">${rupiah(it.price)} x ${it.qty} = ${rupiah(it.price*it.qty)}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+            <div class="qty-control">
+              <button onclick="changeQty(${idx}, -1)">−</button>
+              <div style="min-width:28px;text-align:center">${it.qty}</div>
+              <button onclick="changeQty(${idx}, 1)">+</button>
+            </div>
+            <button onclick="removeItem(${idx})" style="background:transparent;border:none;color:#c33;cursor:pointer">Hapus</button>
+          </div>
+        `;
+        cartListEl.appendChild(li);
+      });
+      cartTotalEl.textContent = rupiah(total);
+    }
+
+    function addToCart(id){
+      const p = PRODUCTS.find(x=>x.id===id); if(!p) return;
+      const exists = cart.find(i=>i.id===id);
+      if(exists) exists.qty++;
+      else cart.push({ id:p.id, name:p.name, price:p.price, qty:1, img:p.img });
+      saveCart();
+      showToast(`${p.name} berhasil ditambahkan ke keranjang`);
+    }
+
+    function buyNow(id){
+      const p = PRODUCTS.find(x=>x.id===id); if(!p) return;
+      cart = [{ id:p.id, name:p.name, price:p.price, qty:1, img:p.img }];
+      saveCart();
+      openCheckout();
+    }
+
+    function changeQty(idx, delta){
+      if(!cart[idx]) return;
+      cart[idx].qty += delta;
+      if(cart[idx].qty < 1) cart[idx].qty = 1;
+      saveCart();
+    }
+    function removeItem(idx){ if(!cart[idx]) return; cart.splice(idx,1); saveCart(); }
+
+    /* cart modal */
+    document.getElementById('cartBtn').addEventListener('click', ()=>openCart());
+    document.getElementById('closeCart').addEventListener('click', ()=>closeCart());
+    function openCart(){ renderCartList(); cartModal.style.display='flex'; cartModal.setAttribute('aria-hidden','false'); }
+    function closeCart(){ cartModal.style.display='none'; cartModal.setAttribute('aria-hidden','true'); }
+
+    /* checkout flow */
+    document.getElementById('toCheckout').addEventListener('click', ()=>openCheckout());
+    document.getElementById('backToCart').addEventListener('click', ()=>{ checkoutModal.style.display='none'; cartModal.style.display='flex'; });
+
+    function openCheckout(){
+      if(cart.length===0){ alert('Keranjang kosong! Silakan tambahkan produk'); return; }
+      cartModal.style.display='none'; checkoutModal.style.display='flex';
+      renderCheckoutItems(); updatePaymentInstruction();
+    }
+
+    function renderCheckoutItems(){
+      const el = document.getElementById('checkoutItems');
+      if(cart.length===0){ el.innerHTML='(Tidak ada item)'; return; }
+      let html = '<ul style="padding-left:18px;text-align:left;margin:0">';
+      cart.forEach(it=> html += `<li>${it.name} — ${it.qty} x ${rupiah(it.price)} = <strong>${rupiah(it.qty*it.price)}</strong></li>`);
+      html += '</ul>';
+      el.innerHTML = html;
+    }
+
+    /* payment instruction */
+    const paymentMethodEl = document.getElementById('paymentMethod');
+    const paymentInstructionEl = document.getElementById('paymentInstruction');
+    paymentMethodEl.addEventListener('change', updatePaymentInstruction);
+    function updatePaymentInstruction(){
+      const v = paymentMethodEl.value;
+      paymentInstructionEl.style.display = v ? 'block' : 'none';
+      if(!v) { paymentInstructionEl.innerHTML=''; return; }
+      if(v==='BCA'){
+        paymentInstructionEl.innerHTML = `<strong>Instruksi BCA:</strong><br>Transfer ke: <strong>BCA 123-456-789 a.n. Hijab Fitsay</strong><br>Setelah transfer silakan konfirmasi via WhatsApp.`;
+      } else if(v==='DANA'){
+        paymentInstructionEl.innerHTML = `<strong>Instruksi DANA:</strong><br>Transfer ke nomor <strong>0812-3456-7890 (DANA)</strong>. Konfirmasi via WhatsApp.`;
+      } else if(v==='OVO'){
+        paymentInstructionEl.innerHTML = `<strong>Instruksi OVO:</strong><br>Transfer ke nomor <strong>0812-3456-7890 (OVO)</strong>. Konfirmasi via WhatsApp.`;
+      } else if(v==='COD'){
+        paymentInstructionEl.innerHTML = `<strong>COD:</strong><br>Pembayaran dilakukan saat pesanan diterima (Bayar di Tempat).`;
+      } else {
+        paymentInstructionEl.innerHTML = `<strong>Bank Lainnya:</strong><br>Silakan transfer ke rekening lain; konfirmasi via WhatsApp.`;
+      }
+    }
+
+    /* checkout submit */
+    document.getElementById('checkoutForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('buyerName').value.trim();
+      const phone = document.getElementById('buyerPhone').value.trim();
+      const address = document.getElementById('buyerAddress').value.trim();
+      const method = paymentMethodEl.value;
+      const note = document.getElementById('buyerNote').value.trim();
+
+      if(!name || !phone || !address || !method){ alert('Harap lengkapi semua data'); return; }
+      if(cart.length===0){ alert('Keranjang kosong!'); return; }
+
+      let total = 0;
+      cart.forEach(it => total += it.price * it.qty);
+
+      const order = {
+        id: 'HF' + Date.now(),
+        name, phone, address, method, note, items: cart.slice(), total, created: new Date().toISOString()
+      };
+
+      // show confirmation
+      showConfirmation(order);
+
+      // clear cart
+      cart = [];
+      saveCart();
+
+      // close checkout modal
+      checkoutModal.style.display = 'none';
     });
-  };
-}
 
-/* print nota */
-function printNota(){ window.print(); }
+    /* show confirmation and WA logic */
+    function showConfirmation(order){
+      document.getElementById('afterCheckout').style.display = 'block';
+      const area = document.getElementById('confirmationArea');
+      let itemsHtml = '<ul style="text-align:left;padding-left:18px">';
+      order.items.forEach(it => itemsHtml += `<li>${it.name} — ${it.qty} x ${rupiah(it.price)} = <strong>${rupiah(it.qty*it.price)}</strong></li>`);
+      itemsHtml += '</ul>';
 
-/* toast */
-function showToast(msg){
-  const t = document.createElement('div');
-  t.textContent = msg;
-  t.style.position='fixed'; t.style.right='20px'; t.style.bottom='20px';
-  t.style.background='rgba(0,0,0,0.75)'; t.style.color='#fff'; t.style.padding='10px 14px';
-  t.style.borderRadius='10px'; t.style.zIndex='120';
-  document.body.appendChild(t);
-  setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity .6s'; setTimeout(()=>t.remove(),650) },2200);
-}
+      area.innerHTML = `
+        <div class="confirmation">
+          <h3>Terima kasih — Pesanan Diterima</h3>
+          <div class="status">Pesanan Terkonfirmasi ✅</div>
+          <div style="text-align:left;max-width:720px;margin:0 auto;">
+            <p><strong>No. Pesanan:</strong> ${order.id}</p>
+            <p><strong>Nama:</strong> ${order.name}</p>
+            <p><strong>No. HP:</strong> ${order.phone}</p>
+            <p><strong>Alamat:</strong> ${order.address}</p>
+            <p><strong>Metode Pembayaran:</strong> ${order.method}</p>
+            ${order.note ? `<p><strong>Catatan:</strong> ${order.note}</p>` : ''}
+            <h4>Detail Produk:</h4>
+            ${itemsHtml}
+            <p style="font-weight:700">Total Pembayaran: ${rupiah(order.total)}</p>
 
-/* keep cart in sync with storage */
-window.addEventListener('storage', ()=>{ cart = JSON.parse(localStorage.getItem('hf_cart_v2')) || []; updateCartUI(); });
+            <div style="display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap">
+              <button class="btn buy" id="waBtn">Konfirmasi via WhatsApp</button>
+              <button class="btn add" id="copyMsg">Salin Pesan Konfirmasi</button>
+              <button class="btn add" id="printBtn">Cetak / Simpan Struk</button>
+              <button class="btn add" id="backHome">Kembali ke Beranda</button>
+            </div>
 
-/* initialize cart UI */
-updateCartUI();
+            <p class="small-note" style="margin-top:10px">Jika WhatsApp tidak langsung membuka pesan, gunakan tombol "Salin Pesan Konfirmasi" lalu buka chat WA toko (atau scan QR) dan paste pesan. Setelah konfirmasi, pesanan akan segera diproses.</p>
+          </div>
+        </div>
+      `;
 
-/* helper scroll */
-function scrollToProducts(){ document.getElementById('produk').scrollIntoView({behavior:'smooth'}) }
+      // prepare messages
+      const plainMsg = `Halo Hijab Fitsay 🌸
+Saya ingin konfirmasi pesanan:
+No. Pesanan: ${order.id}
+Nama: ${order.name}
+No HP: ${order.phone}
+Alamat: ${order.address}
+Metode Pembayaran: ${order.method}
+Total: ${rupiah(order.total)}
 
-/* =========================
-   Sakura petals generator (rose-gold tinted SVG petals)
-   ========================= */
-const PETAL_SVGS = [
-  encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path fill="%23ffd7d3" d="M18 0 C12 6 4 6 1 18 C6 16 11 23 18 36 C25 23 30 16 35 18 C32 6 24 6 18 0Z"/></svg>'),
-  encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path fill="%23fee8e6" d="M18 0 C12 6 4 6 1 18 C6 16 11 23 18 36 C25 23 30 16 35 18 C32 6 24 6 18 0Z"/></svg>'),
-  encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path fill="%23f7e1de" d="M18 0 C12 6 4 6 1 18 C6 16 11 23 18 36 C25 23 30 16 35 18 C32 6 24 6 18 0Z"/></svg>')
-];
+Produk:
+` + order.items.map(it => `${it.name} x${it.qty} - ${rupiah(it.price*it.qty)}`).join('\n') + (order.note ? `\n\nCatatan: ${order.note}` : '');
 
-const petalsContainer = document.getElementById('petals');
-function spawnPetal(){
-  const el = document.createElement('div'); el.className='petal';
-  const img = PETAL_SVGS[Math.floor(Math.random()*PETAL_SVGS.length)];
-  el.style.backgroundImage = `url("data:image/svg+xml;utf8,${img}")`;
-  const startLeft = Math.random() * 110 - 5; // -5% .. 105%
-  const size = 14 + Math.random() * 26; // px
-  el.style.width = size + 'px'; el.style.height = size + 'px';
-  el.style.left = startLeft + 'vw';
-  el.style.top = '-8vh';
-  el.style.opacity = (0.7 + Math.random()*0.3);
-  petalsContainer.appendChild(el);
+      const encodedMsg = encodeURIComponent(plainMsg);
 
-  const duration = 9000 + Math.random()*9000; // 9s-18s
-  const start = performance.now();
-  const startX = (startLeft/100) * window.innerWidth;
-  const amplitude = 60 + Math.random()*110;
-  const phase = Math.random() * Math.PI * 2;
+      // WA button action
+      document.getElementById('waBtn').onclick = function(){
+        if(waNumber && waNumber.trim().length>0){
+          // open direct WA with message
+          const url = `https://wa.me/${waNumber}?text=${encodedMsg}`;
+          window.open(url, '_blank');
+        } else {
+          // open QR link and copy message to clipboard
+          navigator.clipboard?.writeText(plainMsg).then(()=> {
+            showToast('Pesan konfirmasi berhasil disalin. Silakan buka WhatsApp toko (QR) dan paste pesan.');
+          }, ()=> {
+            showToast('Salin pesan gagal otomatis — gunakan tombol "Salin Pesan Konfirmasi" lalu paste di WhatsApp.');
+          });
+          window.open(waQRLink, '_blank');
+        }
+      };
 
-  function animate(now){
-    const t = (now - start) / duration;
-    if(t > 1){ el.remove(); return; }
-    const y = t * (window.innerHeight + 200) - 80;
-    const x = startX + Math.sin(t * 2 * Math.PI + phase) * amplitude;
-    const rot = t * 720 + phase * 30;
-    el.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
-    requestAnimationFrame(animate);
-  }
-  requestAnimationFrame(animate);
-}
+      // copy button
+      document.getElementById('copyMsg').onclick = function(){
+        navigator.clipboard?.writeText(plainMsg).then(()=> {
+          showToast('Pesan konfirmasi disalin. Silakan buka WhatsApp toko dan paste pesan.');
+        }, ()=> {
+          prompt('Salin pesan konfirmasi berikut (CTRL/CMD + C):', plainMsg);
+        });
+      };
 
-/* spawn petals frequently but moderate for performance */
-setInterval(()=> spawnPetal(), 420);
-for(let i=0;i<12;i++) setTimeout(spawnPetal, i*220);
+      // print button
+      document.getElementById('printBtn').onclick = function(){
+        // open print dialog for the confirmation area only
+        const printWindow = window.open('', '_blank', 'width=800,height=600');
+        const html = `
+          <html><head><title>Nota Pesanan ${order.id}</title>
+          <style>body{font-family:Times New Roman, serif;padding:20px;color:#222} h1{color:${getComputedStyle(document.documentElement).getPropertyValue('--accent')||'#b76b56'}}</style>
+          </head><body>
+            <h1>Nota Pesanan — Hijab Fitsay</h1>
+            <p><strong>No. Pesanan:</strong> ${order.id}</p>
+            <p><strong>Nama:</strong> ${order.name}</p>
+            <p><strong>No. HP:</strong> ${order.phone}</p>
+            <p><strong>Alamat:</strong> ${order.address}</p>
+            <p><strong>Metode:</strong> ${order.method}</p>
+            <h3>Produk:</h3>
+            ${itemsHtml}
+            <h3>Total: ${rupiah(order.total)}</h3>
+            <p>Terima kasih — Hijab Fitsay</p>
+          </body></html>`;
+        printWindow.document.write(html);
+        printWindow.document.close();
+        printWindow.focus();
+        printWindow.print();
+      };
 
-/* keep UX responsive on small screens */
-window.addEventListener('resize', ()=>{ /* nothing for now; petals adapt */ });
+      // back to home
+      document.getElementById('backHome').onclick = function(){
+        document.getElementById('afterCheckout').scrollIntoView({behavior:'smooth'});
+        setTimeout(()=>{ window.location.hash = '#home'; window.scrollTo({top:0,behavior:'smooth'}) }, 200);
+      };
 
-</script>
+      // auto-scroll to confirmation
+      document.getElementById('afterCheckout').scrollIntoView({behavior:'smooth'});
+    }
+
+    /* printNota helper (not used directly) */
+    function printNota(){ window.print(); }
+
+    /* toast */
+    function showToast(msg){
+      const t = document.createElement('div');
+      t.textContent = msg;
+      t.style.position='fixed'; t.style.right='20px'; t.style.bottom='20px';
+      t.style.background='rgba(0,0,0,0.8)'; t.style.color='#fff'; t.style.padding='10px 14px';
+      t.style.borderRadius='10px'; t.style.zIndex='140';
+      document.body.appendChild(t);
+      setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity .6s'; setTimeout(()=>t.remove(),650) },2600);
+    }
+
+    /* storage sync */
+    window.addEventListener('storage', ()=>{ cart = JSON.parse(localStorage.getItem('hf_cart_v3')) || []; updateCartUI(); });
+
+    /* init */
+    updateCartUI();
+
+    /* helper scroll */
+    function scrollToProducts(){ document.getElementById('produk').scrollIntoView({behavior:'smooth'}) }
+
+    /* =========================
+       Petals generator (gold-brown/coklat medok petals)
+       ========================= */
+    const PETALS = [
+      encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path fill="%23c89b7a" d="M18 0 C12 6 4 6 1 18 C6 16 11 23 18 36 C25 23 30 16 35 18 C32 6 24 6 18 0Z"/></svg>'),
+      encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path fill="%23d6a77e" d="M18 0 C12 6 4 6 1 18 C6 16 11 23 18 36 C25 23 30 16 35 18 C32 6 24 6 18 0Z"/></svg>'),
+      encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path fill="%23b07b57" d="M18 0 C12 6 4 6 1 18 C6 16 11 23 18 36 C25 23 30 16 35 18 C32 6 24 6 18 0Z"/></svg>')
+    ];
+
+    const petalsContainer = document.getElementById('petals');
+    function spawnPetal(){
+      const el = document.createElement('div'); el.className='petal';
+      const svg = PETALS[Math.floor(Math.random()*PETALS.length)];
+      el.style.backgroundImage = `url("data:image/svg+xml;utf8,${svg}")`;
+      const startLeft = Math.random() * 110 - 5; // -5 .. 105 vw
+      const size = 12 + Math.random()*30;
+      el.style.width = size + 'px'; el.style.height = size + 'px';
+      el.style.left = startLeft + 'vw';
+      el.style.top = '-8vh';
+      el.style.opacity = (0.7 + Math.random()*0.3);
+      petalsContainer.appendChild(el);
+
+      const duration = 9000 + Math.random()*9000;
+      const start = performance.now();
+      const startX = (startLeft/100) * window.innerWidth;
+      const amplitude = 50 + Math.random()*120;
+      const phase = Math.random()*Math.PI*2;
+
+      function animate(now){
+        const t = (now - start) / duration;
+        if(t > 1){ el.remove(); return; }
+        const y = t * (window.innerHeight + 220) - 80;
+        const x = startX + Math.sin(t * 2 * Math.PI + phase) * amplitude;
+        const rot = t * 720 + phase * 30;
+        el.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+    }
+
+    setInterval(()=> spawnPetal(), 420);
+    for(let i=0;i<12;i++) setTimeout(spawnPetal, i*220);
+
+  </script>
 </body>
 </html>
