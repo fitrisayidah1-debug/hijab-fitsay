@@ -1,6 +1,3 @@
-Oke! Saya bisa bantu menyatukan kedua kode HTML yang sudah kamu buat menjadi satu file lengkap dengan **fitur transaksi, data customer, keranjang, dan checkout** yang sudah kamu tulis. Saya juga akan memastikan **effect petals, header, hero, produk, about, kontak, footer, modal keranjang dan checkout** tetap jalan. Berikut versi gabungannya:
-
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -112,23 +109,17 @@ Oke! Saya bisa bantu menyatukan kedua kode HTML yang sudah kamu buat menjadi sat
     </section>
 
     <section class="container" id="produk">
-      <h2 class="section-title
-```
+      <h2 class="section-title">Koleksi Terbaru</h2>
+      <div class="products" id="productsGrid"></div>
+    </section>
 
-
-">Koleksi Terbaru</h2> <div class="products" id="productsGrid"></div> </section>
-
-```
-<!-- confirmation after checkout -->
-<section class="container" id="afterCheckout" style="display:none; margin-top:28px;">
-  <div class="panel" id="confirmationArea"></div>
-</section>
-```
-
+    <!-- confirmation after checkout -->
+    <section class="container" id="afterCheckout" style="display:none; margin-top:28px;">
+      <div class="panel" id="confirmationArea"></div>
+    </section>
   </main>
 
   <!-- cart modal -->
-
   <div class="modal" id="cartModal" aria-hidden="true">
     <div class="panel">
       <h2>Keranjang Belanja</h2>
@@ -145,7 +136,6 @@ Oke! Saya bisa bantu menyatukan kedua kode HTML yang sudah kamu buat menjadi sat
   </div>
 
   <!-- checkout modal -->
-
   <div class="modal" id="checkoutModal" aria-hidden="true">
     <div class="panel">
       <h2>Form Pembelian</h2>
@@ -176,7 +166,6 @@ Oke! Saya bisa bantu menyatukan kedua kode HTML yang sudah kamu buat menjadi sat
   </div>
 
   <!-- footer -->
-
   <footer>
     <div style="max-width:980px;margin:0 auto">
       <div style="font-size:14px;opacity:0.95">Ikuti kami</div>
@@ -285,76 +274,72 @@ Oke! Saya bisa bantu menyatukan kedua kode HTML yang sudah kamu buat menjadi sat
               <div style="min-width:28px;text-align:center">${it.qty}</div>
               <button onclick="changeQty(${idx},1)">+</button>
             </div>
-            <button onclick="removeItem(${idx})" style="background:transparent;border:none;color:#c33;cursor:pointer
+            <button onclick="removeItem(${idx})" style="background:transparent;border:none;color:#c33;cursor:pointer">Hapus</button>
+          </div>`;
+        cartListEl.appendChild(li);
+      });
+      cartTotalEl.textContent=rupiah(total);
+    }
 
+    function addToCart(id){
+      const p=PRODUCTS.find(x=>x.id===id); if(!p) return;
+      const exists=cart.find(i=>i.id===id);
+      if(exists) exists.qty++; else cart.push({id:p.id,name:p.name,price:p.price,qty:1,img:p.img});
+      saveCart(); alert(`${p.name} berhasil ditambahkan ke keranjang`);
+    }
 
-">Hapus</button> </div>`;
-cartListEl.appendChild(li);
-});
-cartTotalEl.textContent=rupiah(total);
-}
+    function buyNow(id){ const p=PRODUCTS.find(x=>x.id===id); if(!p) return; cart=[{id:p.id,name:p.name,price:p.price,qty:1,img:p.img}]; saveCart(); openCheckout(); }
 
-```
-function addToCart(id){
-  const p=PRODUCTS.find(x=>x.id===id); if(!p) return;
-  const exists=cart.find(i=>i.id===id);
-  if(exists) exists.qty++; else cart.push({id:p.id,name:p.name,price:p.price,qty:1,img:p.img});
-  saveCart(); alert(`${p.name} berhasil ditambahkan ke keranjang`);
-}
+    function changeQty(idx,delta){ if(!cart[idx]) return; cart[idx].qty+=delta; if(cart[idx].qty<1) cart[idx].qty=1; saveCart(); }
+    function removeItem(idx){ if(!cart[idx]) return; cart.splice(idx,1); saveCart(); }
 
-function buyNow(id){ const p=PRODUCTS.find(x=>x.id===id); if(!p) return; cart=[{id:p.id,name:p.name,price:p.price,qty:1,img:p.img}]; saveCart(); openCheckout(); }
+    document.getElementById('cartBtn').addEventListener('click',()=>openCart());
+    document.getElementById('closeCart').addEventListener('click',()=>closeCart());
+    function openCart(){ renderCartList(); cartModal.style.display='flex'; cartModal.setAttribute('aria-hidden','false'); }
+    function closeCart(){ cartModal.style.display='none'; cartModal.setAttribute('aria-hidden','true'); }
 
-function changeQty(idx,delta){ if(!cart[idx]) return; cart[idx].qty+=delta; if(cart[idx].qty<1) cart[idx].qty=1; saveCart(); }
-function removeItem(idx){ if(!cart[idx]) return; cart.splice(idx,1); saveCart(); }
+    document.getElementById('toCheckout').addEventListener('click',()=>openCheckout());
+    document.getElementById('backToCart').addEventListener('click',()=>{ checkoutModal.style.display='none'; cartModal.style.display='flex'; });
 
-document.getElementById('cartBtn').addEventListener('click',()=>openCart());
-document.getElementById('closeCart').addEventListener('click',()=>closeCart());
-function openCart(){ renderCartList(); cartModal.style.display='flex'; cartModal.setAttribute('aria-hidden','false'); }
-function closeCart(){ cartModal.style.display='none'; cartModal.setAttribute('aria-hidden','true'); }
+    function openCheckout(){
+      if(cart.length===0){ alert('Keranjang kosong!'); return; }
+      cartModal.style.display='none'; checkoutModal.style.display='flex';
+      renderCheckoutItems(); updatePaymentInstruction();
+    }
 
-document.getElementById('toCheckout').addEventListener('click',()=>openCheckout());
-document.getElementById('backToCart').addEventListener('click',()=>{ checkoutModal.style.display='none'; cartModal.style.display='flex'; });
+    function renderCheckoutItems(){
+      const el=document.getElementById('checkoutItems'); if(cart.length===0){ el.innerHTML='(Tidak ada item)'; return; }
+      let html='<ul style="padding-left:18px;text-align:left;margin:0">';
+      cart.forEach(it=> html+=`<li>${it.name} — ${it.qty} x ${rupiah(it.price)} = <strong>${rupiah(it.qty*it.price)}</strong></li>`);
+      html+='</ul>'; el.innerHTML=html;
+    }
 
-function openCheckout(){
-  if(cart.length===0){ alert('Keranjang kosong!'); return; }
-  cartModal.style.display='none'; checkoutModal.style.display='flex';
-  renderCheckoutItems(); updatePaymentInstruction();
-}
+    const paymentMethodEl=document.getElementById('paymentMethod');
+    const paymentInstructionEl=document.getElementById('paymentInstruction');
+    paymentMethodEl.addEventListener('change',updatePaymentInstruction);
+    function updatePaymentInstruction(){
+      const v=paymentMethodEl.value; paymentInstructionEl.style.display=v?'block':'none'; if(!v){ paymentInstructionEl.innerHTML=''; return; }
+      if(v==='BCA'){ paymentInstructionEl.innerHTML='<strong>Instruksi BCA:</strong><br>Transfer ke: <strong>BCA 123-456-789 a.n. Hijab Fitsay</strong><br>Konfirmasi via WhatsApp.'; }
+      else if(v==='DANA'){ paymentInstructionEl.innerHTML='<strong>Instruksi DANA:</strong><br>Transfer ke 0812-3456-7890 (DANA). Konfirmasi via WhatsApp.'; }
+      else if(v==='OVO'){ paymentInstructionEl.innerHTML='<strong>Instruksi OVO:</strong><br>Transfer ke 0812-3456-7890 (OVO). Konfirmasi via WhatsApp.'; }
+      else if(v==='COD'){ paymentInstructionEl.innerHTML='<strong>COD:</strong><br>Bayar saat menerima pesanan.'; }
+      else { paymentInstructionEl.innerHTML='<strong>Bank Lainnya:</strong><br>Silakan transfer sesuai instruksi.'; }
+    }
 
-function renderCheckoutItems(){
-  const el=document.getElementById('checkoutItems'); if(cart.length===0){ el.innerHTML='(Tidak ada item)'; return; }
-  let html='<ul style="padding-left:18px;text-align:left;margin:0">';
-  cart.forEach(it=> html+=`<li>${it.name} — ${it.qty} x ${rupiah(it.price)} = <strong>${rupiah(it.qty*it.price)}</strong></li>`);
-  html+='</ul>'; el.innerHTML=html;
-}
+    document.getElementById('checkoutForm').addEventListener('submit',function(e){
+      e.preventDefault();
+      const buyer={name:document.getElementById('buyerName').value, phone:document.getElementById('buyerPhone').value, address:document.getElementById('buyerAddress').value, note:document.getElementById('buyerNote').value, payment:paymentMethodEl.value};
+      let confirmationHTML=`<div class="confirmation"><h3>Terima kasih, ${buyer.name}!</h3><div class="status">Pesanan Anda berhasil dibuat.</div>`;
+      confirmationHTML+=`<div>Produk yang dibeli:</div><ul>`;
+      cart.forEach(it=>confirmationHTML+=`<li>${it.name} — ${it.qty} x ${rupiah(it.price)} = <strong>${rupiah(it.qty*it.price)}</strong></li>`);
+      confirmationHTML+=`</ul><div>Total: <strong>${rupiah(cart.reduce((s,i)=>s+i.price*i.qty,0))}</strong></div>`;
+      confirmationHTML+=`<div>Alamat: ${buyer.address}</div><div>Nomor HP: ${buyer.phone}</div><div>Catatan: ${buyer.note||'-'}</div><div>Metode Pembayaran: ${buyer.payment}</div></div>`;
+      document.getElementById('confirmationArea').innerHTML=confirmationHTML;
+      checkoutModal.style.display='none'; document.getElementById('afterCheckout').style.display='block';
+      cart=[]; saveCart();
+    });
 
-const paymentMethodEl=document.getElementById('paymentMethod');
-const paymentInstructionEl=document.getElementById('paymentInstruction');
-paymentMethodEl.addEventListener('change',updatePaymentInstruction);
-function updatePaymentInstruction(){
-  const v=paymentMethodEl.value; paymentInstructionEl.style.display=v?'block':'none'; if(!v){ paymentInstructionEl.innerHTML=''; return; }
-  if(v==='BCA'){ paymentInstructionEl.innerHTML='<strong>Instruksi BCA:</strong><br>Transfer ke: <strong>BCA 123-456-789 a.n. Hijab Fitsay</strong><br>Konfirmasi via WhatsApp.'; }
-  else if(v==='DANA'){ paymentInstructionEl.innerHTML='<strong>Instruksi DANA:</strong><br>Transfer ke 0812-3456-7890 (DANA). Konfirmasi via WhatsApp.'; }
-  else if(v==='OVO'){ paymentInstructionEl.innerHTML='<strong>Instruksi OVO:</strong><br>Transfer ke 0812-3456-7890 (OVO). Konfirmasi via WhatsApp.'; }
-  else if(v==='COD'){ paymentInstructionEl.innerHTML='<strong>COD:</strong><br>Bayar saat menerima pesanan.'; }
-  else { paymentInstructionEl.innerHTML='<strong>Bank Lainnya:</strong><br>Silakan transfer sesuai instruksi.'; }
-}
-
-document.getElementById('checkoutForm').addEventListener('submit',function(e){
-  e.preventDefault();
-  const buyer={name:document.getElementById('buyerName').value, phone:document.getElementById('buyerPhone').value, address:document.getElementById('buyerAddress').value, note:document.getElementById('buyerNote').value, payment:paymentMethodEl.value};
-  let confirmationHTML=`<div class="confirmation"><h3>Terima kasih, ${buyer.name}!</h3><div class="status">Pesanan Anda berhasil dibuat.</div>`;
-  confirmationHTML+=`<div>Produk yang dibeli:</div><ul>`;
-  cart.forEach(it=>confirmationHTML+=`<li>${it.name} — ${it.qty} x ${rupiah(it.price)} = <strong>${rupiah(it.qty*it.price)}</strong></li>`);
-  confirmationHTML+=`</ul><div>Total: <strong>${rupiah(cart.reduce((s,i)=>s+i.price*i.qty,0))}</strong></div>`;
-  confirmationHTML+=`<div>Alamat: ${buyer.address}</div><div>Nomor HP: ${buyer.phone}</div><div>Catatan: ${buyer.note||'-'}</div><div>Metode Pembayaran: ${buyer.payment}</div></div>`;
-  document.getElementById('confirmationArea').innerHTML=confirmationHTML;
-  checkoutModal.style.display='none'; document.getElementById('afterCheckout').style.display='block';
-  cart=[]; saveCart();
-});
-
-function scrollToProducts(){ document.getElementById('produk').scrollIntoView({behavior:'smooth'}); }
-```
+    function scrollToProducts(){ document.getElementById('produk').scrollIntoView({behavior:'smooth'}); }
 
   </script>
 </body>
