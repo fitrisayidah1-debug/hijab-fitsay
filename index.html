@@ -75,7 +75,7 @@
       position:absolute;
       width:32px; height:32px;
       background-size:contain; background-repeat:no-repeat;
-      will-change:transform,opacity; opacity:0.95;
+      will-change:transform,opacity; opacity:0.6; /* Dibuat lebih lembut transparan */
       transform-origin:center; z-index:0;
     }
 
@@ -402,25 +402,53 @@
 
     function scrollToProducts(){ document.getElementById('produk').scrollIntoView({behavior:'smooth'}) }
 
-    /* Petals Original */
-    const PETALS = [encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path fill="%23c89b7a" d="M18 0 C12 6 4 6 1 18 C6 16 11 23 18 36 C25 23 30 16 35 18 C32 6 24 6 18 0Z"/></svg>')];
+    /* --- UPDATE BUNGA ELEGAN --- */
+    // Menggunakan palet Rose Gold (#e3ad9a), Soft Pink (#f7d7d7), dan Gold (#f5e3b5)
+    const PETALS = [
+      encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path fill="%23e3ad9a" d="M18 0 C12 6 4 6 1 18 C6 16 11 23 18 36 C25 23 30 16 35 18 C32 6 24 6 18 0Z"/></svg>'), // Rose Gold
+      encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path fill="%23f7d7d7" d="M18 0 C12 6 4 6 1 18 C6 16 11 23 18 36 C25 23 30 16 35 18 C32 6 24 6 18 0Z"/></svg>'), // Soft Pink
+      encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path fill="%23f5e3b5" d="M18 0 C12 6 4 6 1 18 C6 16 11 23 18 36 C25 23 30 16 35 18 C32 6 24 6 18 0Z"/></svg>')  // Light Gold
+    ];
+    
     const petalsContainer = document.getElementById('petals');
+    
     function spawnPetal(){
-      const el = document.createElement('div'); el.className='petal';
-      el.style.backgroundImage = `url("data:image/svg+xml;utf8,${PETALS[0]}")`;
-      el.style.left = Math.random() * 100 + 'vw'; el.style.top = '-8vh';
+      const el = document.createElement('div'); 
+      el.className='petal';
+      // Mengacak warna dari daftar PETALS
+      const randomColor = PETALS[Math.floor(Math.random() * PETALS.length)];
+      el.style.backgroundImage = `url("data:image/svg+xml;utf8,${randomColor}")`;
+      
+      // Mengacak ukuran agar lebih natural
+      const size = Math.random() * 20 + 15; 
+      el.style.width = size + 'px';
+      el.style.height = size + 'px';
+      
+      el.style.left = Math.random() * 100 + 'vw'; 
+      el.style.top = '-8vh';
       petalsContainer.appendChild(el);
-      const duration = 9000 + Math.random()*9000;
+      
+      const duration = 10000 + Math.random()*8000;
       const start = performance.now();
+      
       function animate(now){
         const t = (now - start) / duration;
         if(t > 1){ el.remove(); return; }
-        el.style.transform = `translateY(${t * (window.innerHeight + 200)}px) rotate(${t * 720}deg)`;
+        
+        // Gerakan melayang halus dengan sedikit ayunan (Sinus)
+        const xOffset = Math.sin(t * 5) * 50; 
+        el.style.transform = `translate(${xOffset}px, ${t * (window.innerHeight + 200)}px) rotate(${t * 360}deg)`;
+        el.style.opacity = 0.6 * (1 - t); // Memudar saat mendekati bawah
+        
         requestAnimationFrame(animate);
       }
       requestAnimationFrame(animate);
     }
-    setInterval(spawnPetal, 420);
+    
+    // Interval spawn bunga
+    setInterval(spawnPetal, 600);
+    /* --- END BUNGA ELEGAN --- */
+
     updateCartUI();
   </script>
 </body>
